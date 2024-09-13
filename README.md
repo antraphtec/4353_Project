@@ -19,9 +19,9 @@ Welcome to our **Volunteer Web Application**! Our mission is to create a platfor
 ## Key Functionalities:
 - 🔒 **Secure Login and Registration**: Robust authentication for both volunteers and admins; options to reset password.
 - 📈 **Effortless Event Management**: Admins can easily create, edit, and manage events; volunteers can find and sign up for events that match their availability and interests.
-- 🤸 **User Profile Management**: Volunteers and admins can keep their personal details up-to-date (name, contact info, etc.).
-- 🔥 **Smart Volunteer Matching**: Volunteers are paired with events based on their location, preferences, and skill sets.
-- 📲 **Real-Time Notifications**: Keep everyone informed by sending out updates on events in real-time!
+- 🤸 **User Profile Management**: Volunteers and administrators can update their personal details (name, contact info, etc.).
+- 🔥 **Smart Volunteer Matching**: Volunteers are matched with events based on their location, preferences, and existing skill sets.
+- 📲 **Real-Time Notifications System**: Keep everyone informed by sending out updates on events in real-time!
 
 ## Technology Stack:
 ### Frontend:
