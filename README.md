@@ -44,7 +44,7 @@ Welcome to our **Volunteer Web Application**! Our mission is to create a platfor
 - **SendGrid/Twilio**: Keep everyone connected with email and SMS notifications.
 
 ## Development Methodology
-We're using a methodology called **Agile** development! 
+We're using **Agile** for our development methodology! 
 - **Constant Iterations**: We roll out features in manageable chunks, receiving constant feedback in order to improve.
 - **Collaboration is Key**: With regular team meetings 2-3x a week, we're always on the same page.
 - **Flexibility & Adaptability**: We stay agile, ready to pivot and adjust our project as needed to meet user needs!
