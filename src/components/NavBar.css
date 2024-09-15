@@ -1,0 +1,47 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+  background-color: #fff;
+  border-bottom: 2px solid #ddd;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 30px;
+  margin-right: 10px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #333;
+}
+
+.nav-links a:hover {
+  color: #007bff;
+}
+
+.sign-in-btn {
+  border: 1px solid #333;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.volunteer-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}

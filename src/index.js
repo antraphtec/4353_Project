@@ -1,8 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import NAVBAR from "./components/NavBar";
+import HERO from "./components/hero";
+import Footer from "./components/footer";
 
 function App() {
-  return <h1>Hello React!</h1>;
+  return (
+    <Router>
+      <NAVBAR />
+      <HERO />
+      <Footer />
+    </Router>
+  );
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
