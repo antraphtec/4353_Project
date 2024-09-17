@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NAVBAR from "./components/NavBar";
 import HERO from "./components/hero";
 import Footer from "./components/footer";
+import AdminLogin from "./components/AdminLogin";
 
 function App() {
   return (
