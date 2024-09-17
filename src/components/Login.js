@@ -18,34 +18,39 @@ const handleSubmit = (event) => {
   };
 
   return (
-    <div className="login-container">
-      <h2>Already a Volunteer? Log In</h2>
-      <div className="login-toggle">
-        <button onClick={() => setIsAdmin(false)} disabled={!isAdmin}>Volunteer Log In</button>
-        <button onClick={() => setIsAdmin(true)} disabled={isAdmin}>Admin Log In</button>
+    <div className="login-page-container">
+      <div className="login-left"></div>
+
+      <div className="login-right"></div>
+        <div className="login-box">
+          <h2>Already a Volunteer? Log In</h2>
+
+          <div className="login-toggle">
+            <button onClick={() => setIsAdmin(false)} disabled={!isAdmin}>Volunteer Log In</button>
+            <button onClick={() => setIsAdmin(true)} disabled={isAdmin}>Admin Log In</button>
+          </div>
+
+          <form onSubmit={handleSubmit}>
+            <label>Email Address:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+
+            <label>Password:</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            
+            <button type="submit">Log In</button>
+          </form>
+        </div>
       </div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email Address:
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Log In</button>
-      </form>
-    </div>
   );
 }
 
