@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import "./AdminLogin.css";
+import "./Login.css";
 //import { Link } from "react-router-dom";
 
-function AdminLogin() {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isAdmin, setIsAdmin] = useState(false); 
@@ -49,4 +49,4 @@ const handleSubmit = (event) => {
   );
 }
 
-export default AdminLogin;
+export default Login;

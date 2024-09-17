@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NAVBAR from "./components/NavBar";
 import HERO from "./components/hero";
 import Footer from "./components/footer";
-import ADMINLOGIN from "./components/AdminLogin";
+import LOGIN from "./components/Login";
 import './styles/LoginModal.css';
 
 function App() {
@@ -23,12 +23,12 @@ function App() {
         <NAVBAR handleSignInClick={handleSignInClick} />
       <HERO />
       <Routes>
-        <Route path="/admin-login" element={<ADMINLOGIN />} />
+        <Route path="/admin-login" element={<LOGIN />} />
       </Routes>
 
       {showLogin && (
         <div className="login-modal">
-          <ADMINLOGIN />
+          <LOGIN />
           <button onClick={closeLogin}>Close</button> 
         </div>
       )}
