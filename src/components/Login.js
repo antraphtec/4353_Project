@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import "./Login.css";
 //import { Link } from "react-router-dom";
 
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +21,7 @@ const handleSubmit = (event) => {
   return (
     <div className="login-page-container">
       <div className="login-left"></div>
+
 
       <div className="login-right"></div>
         <div className="login-box">
@@ -46,12 +48,15 @@ const handleSubmit = (event) => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            
+
             <button type="submit">Log In</button>
           </form>
+
+          <a href="/forgot-password">Forgot Password?</a>
         </div>
       </div>
   );
 }
+
 
 export default Login;

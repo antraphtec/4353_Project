@@ -1,86 +1,135 @@
 .login-page-container {
     display: flex;
     height: 100vh;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+img{
+    width: 100%;
+    max-width: 400px;
+    height: auto;
 }
 
 .login-left {
-    flex: 1;
-    background: linear-gradient(180deg, #15B1EA 0%, #A8E0EF 40%, #577E73 100%);
-    background-size: cover;
-    background-position: center;
+    flex: 2;
+    width: 100%;
+    background: 
+        url('/public/images/boy.png') center bottom no-repeat,
+        url('/public/images/world.png') center no-repeat, 
+        linear-gradient(180deg, #15B1EA 0%, #A8E0EF 40%, #577E73 100%);
+    background-size: 65%, contain, cover;
+    background-position: center, center, left bottom; 
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin: 0;
+    padding: 0;
 }
+
 
 .login-right {
     flex: 1;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0;
+    padding: 40;
 }
 
 .login-box{
-    width: 400px;
-    padding: 40px;
+    width: 650px;
+    padding: 60px;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
+    margin: 0;
 }
 
 .login-box h2 {
     text-align: center;
-    margin-bottom: 20px;
-}
+    margin-bottom: 30px;
+    font-size: 24px;
+    font-weight: 600;}
 
 .login-toggle {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .login-toggle button {
     flex: 1;
-    padding: 10px;
-    margin: 0 5px;
+    padding: 16px;
+    margin: 0 10px;
     cursor: pointer;
+    background-color: #475443;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 500;
 }
+
+.login-toggle button.disabled {
+    background-color: #e5e5e5;
+    color: #888;
+    cursor: default;
+}
+
 form {
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
 }
 
 label {
     margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 input{
-    padding: 10px;
+    padding: 14px;
     margin-bottom: 20px;
+    font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
     width: 100%;
 }
 
-/* .login-box input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-} */
 
 button[type="submit"] {
-    padding: 10px;
+    padding: 15px;
     background-color: #475443;  
     color: white; 
+    font-size: 18px;
     border: none;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 .login-box a {
-    display: block;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
     color: #0066cc;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+input::placeholder {
+    color: #b3b3b3; 
+    font-size: 14px; 
   }
+
+  a:hover {
+    color: #004499;
+  }
+  
