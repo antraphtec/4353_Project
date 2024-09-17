@@ -15,7 +15,7 @@
     cursor: pointer;
 }
 .login-toggle button:disabled {
-    background-color: #a41919;
+    background-color: #7bc67f24;
 }
 
 label {

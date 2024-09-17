@@ -1,7 +1,7 @@
 import React from "react";
 import "./NavBar.css";
 
-const NavigationBar = () => {
+const NavigationBar = ({ handleSignInClick }) => {
   return (
     <nav className="navbar">
       <div className="logo">
@@ -9,19 +9,16 @@ const NavigationBar = () => {
         <span>CauseConnect</span>
       </div>
       <ul className="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/get-involved">Get Involved</a></li>
         <li>
-          <a href="/">Home</a>
-        </li>
-        <li>
-          <a href="/about">About</a>
-        </li>
-        <li>
-          <a href="/get-involved">Get Involved</a>
-        </li>
-        <li>
-          <a href="/signin" className="sign-in-btn">
+          <button onClick={handleSignInClick} className="sign-in-btn">
             Sign In
-          </a>
+          </button>
+          {/* <a href="/signin" className="sign-in-btn">
+            Sign In
+          </a> */}
         </li>
         <li>
           <a href="/volunteer" className="volunteer-btn">
