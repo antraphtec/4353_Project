@@ -14,6 +14,7 @@ function App() {
         <Route path="/" element={<HERO />} />
         <Route path="/ admin-login" element={<ADMINLOGIN />} />
       </Routes>
+      <HERO />
       <Footer />
     </Router>
   );
