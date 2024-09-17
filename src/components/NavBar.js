@@ -1,7 +1,15 @@
 import React from "react";
 import "./NavBar.css";
+import { useNavigate } from "react-router-dom";
 
-const NavigationBar = ({ handleSignInClick }) => {
+
+const NavigationBar = () => {
+  const navigate = useNavigate();
+
+  const handleSignInClick = () => {
+    navigate('/login');
+  };
+
   return (
     <nav className="navbar">
       <div className="logo">
@@ -21,9 +29,7 @@ const NavigationBar = ({ handleSignInClick }) => {
           </a> */}
         </li>
         <li>
-          <a href="/volunteer" className="volunteer-btn">
-            Volunteer
-          </a>
+          <a href="/volunteer" className="volunteer-btn">Volunteer</a>
         </li>
       </ul>
     </nav>
