@@ -5,6 +5,7 @@ import NAVBAR from "./components/NavBar";
 import HERO from "./components/hero";
 import Footer from "./components/footer";
 import LOGIN from "./components/Login";
+
 import './styles/LoginModal.css';
 
 function App() {
