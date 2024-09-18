@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Registration</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/css/intlTelInput.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="image-section">
+        <img src="palm_earth.png" alt="Hand holding the Earth" class="palm-earth">
+      </div>
+
+      <div class="form-section">
+        <h1>Be a Changemaker: Volunteer with Us</h1>
+        <p>Get started by making an account with us!</p>
+
+        <form class="registration-form">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="8023456789" required>
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter a secure password" required>
+
+          <button type="submit">Volunteer Now</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.min.js"></script>
+    <script>
+      const phoneInputField = document.querySelector("#phone");
+      const phoneInput = window.intlTelInput(phoneInputField, {
+        initialCountry: "ng", // Nigeria as the default
+        preferredCountries: ["ng", "us", "gb"], // Nigeria, US, UK as options
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js" // for phone number formatting
+      });
+
+    </script>
+  </body>
+
+</html>
