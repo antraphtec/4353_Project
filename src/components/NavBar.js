@@ -1,7 +1,15 @@
 import React from "react";
 import "./NavBar.css";
+import { useNavigate } from "react-router-dom";
+
 
 const NavigationBar = () => {
+  const navigate = useNavigate();
+
+  const handleSignInClick = () => {
+    navigate('/login');
+  };
+
   return (
     <nav className="navbar">
       <div className="logo">
@@ -9,24 +17,19 @@ const NavigationBar = () => {
         <span>CauseConnect</span>
       </div>
       <ul className="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/get-involved">Get Involved</a></li>
         <li>
-          <a href="/">Home</a>
-        </li>
-        <li>
-          <a href="/about">About</a>
-        </li>
-        <li>
-          <a href="/get-involved">Get Involved</a>
-        </li>
-        <li>
-          <a href="/signin" className="sign-in-btn">
+          <button onClick={handleSignInClick} className="sign-in-btn">
             Sign In
-          </a>
+          </button>
+          {/* <a href="/signin" className="sign-in-btn">
+            Sign In
+          </a> */}
         </li>
         <li>
-          <a href="/volunteer" className="volunteer-btn">
-            Volunteer
-          </a>
+          <a href="/volunteer" className="volunteer-btn">Volunteer</a>
         </li>
       </ul>
     </nav>
