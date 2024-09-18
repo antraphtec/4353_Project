@@ -7,7 +7,7 @@ import Footer from "./components/footer";
 import LOGIN from "./components/Login";
 import './styles/LoginModal.css';
 
-import Registration from "./components/registration";
+// import Registration from "./components/registration";
 
 function App() {
   
@@ -30,7 +30,7 @@ function App() {
           <HERO />
         </>} />
 
-        <Route path="/register" element={<Registration />} />
+        {/* <Route path="/register" element={<Registration />} /> */}
 
       </Routes>
       <Footer />
