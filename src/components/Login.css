@@ -12,6 +12,12 @@ img{
     height: auto;
 }
 
+img{
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}
+
 .login-left {
     flex: 2;
     width: 100%;
