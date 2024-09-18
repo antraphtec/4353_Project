@@ -1,0 +1,35 @@
+.volunteer-matching-container {
+  display: flex;
+  height: 100vh;
+}
+
+.background-image {
+  flex: 1;
+  background-color: #e0f7fa; /* Use a fallback color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Ensure the image covers the container */
+}
+
+.form-container {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+hr {
+  margin: 20px 0;
+}
