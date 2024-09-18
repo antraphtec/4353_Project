@@ -10,8 +10,11 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('earthy_background.png');
+
+    /*background: url('/public/images/world.png') center no-repeat;*/
+
     background-size: cover;
+
     background-repeat: no-repeat;
   }
   

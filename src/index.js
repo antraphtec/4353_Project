@@ -7,6 +7,8 @@ import Footer from "./components/footer";
 import LOGIN from "./components/Login";
 import './styles/LoginModal.css';
 
+import Registration from "./components/registration";
+
 function App() {
   
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path="/get-involved" element={<>
           <HERO />
         </>} />
+
+        <Route path="/register" element={<Registration />} />
 
       </Routes>
       <Footer />

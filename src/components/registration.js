@@ -1,3 +1,6 @@
+import React from 'react';
+import './registration.css';
+
 document.querySelector('.registration-form').addEventListener('submit', function(event) {
     const emailInput = document.getElementById('email');
     const phoneInput = document.getElementById('phone');
@@ -17,3 +20,6 @@ document.querySelector('.registration-form').addEventListener('submit', function
       event.preventDefault();
     }
   });
+
+
+  export default Registration;
