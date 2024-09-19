@@ -1,132 +1,52 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-}
-
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 90%;
-    max-width: 1200px;
-    height: 600px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-
-.image-side {
-    flex: 1;
-    background: linear-gradient(135deg, #72c6ef 0%, #004e92 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.image-side img {
-    max-width: 80%;
-    height: auto;
-}
-
-.form-side {
-    flex: 1;
-    padding: 40px;
-    overflow-y: auto;
-}
-
-h2 {
-    margin-bottom: 10px;
-    font-size: 28px;
-    color: #2c3e50;
-}
-
-.subheading {
-    margin-bottom: 20px;
-    font-size: 16px;
-    color: #7f8c8d;
-}
-
-.form-title {
-    margin-bottom: 30px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-
-input[type="text"],
-input[type="date"],
-textarea,
-select {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #bdc3c7;
-    border-radius: 4px;
-    font-size: 16px;
-    width: 100%;
-}
-
-textarea {
-    resize: vertical;
-    max-height: 150px;
-}
-
-select[multiple] {
-    height: 200px;  /* Increase the height to avoid cutting off */
-    overflow-y: scroll;
-    border: 1px solid #bdc3c7;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-button {
-    padding: 15px;
-    background-color: #27ae60;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #2ecc71;
-}
-
-/* For responsiveness: */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        height: auto;
-    }
-
-    .image-side {
-        display: none;  /* Hide the image side on smaller screens */
-    }
-
-    .form-side {
-        padding: 20px;
-    }
-}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Events</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-side">
+        <h2>Manage Events</h2>
+        <p class="subheading">As administrator, you can create and edit existing events here.</p>
+        <p class="form-title">Please Fill Out The Form</p>
+        <form id="event-form">
+          <label for="event-name">Name of Event</label>
+          <input type="text" id="event-name" name="event-name" placeholder="Volunteer event..." maxlength="100" required>
+          <label for="event-description">Event Description</label>
+          <textarea id="event-description" name="event-description" placeholder="A brief description of the event..." rows="4" required></textarea>
+          <label for="location">Location</label>
+          <input type="text" id="location" name="location" placeholder="Type in the event location..." required>
+          <label for="urgency">Urgency</label>
+          <select id="urgency" name="urgency" required>
+            <option value="">Select Urgency</option>
+            <option value="minor">Minor</option>
+            <option value="medium">Medium</option>
+            <option value="major">Major</option>
+            <option value="critical">Critical</option>
+          </select>
+          <label for="skills">Required Skills</label>
+          <select id="skills" name="skills" multiple required>
+            <option value="leadership">Leadership</option>
+            <option value="communication">Communication</option>
+            <option value="time-management">Time Management</option>
+            <option value="problem-solving">Problem Solving</option>
+            <option value="construction">Construction</option>
+            <option value="organization">Organization</option>
+            <option value="teamwork">Teamwork</option>
+          </select>
+          <label for="event-date">Event Date & Time</label>
+          <input type="date" id="event-date" name="event-date" required>
+          <button type="submit">Publish Event</button>
+        </form>
+      </div>
+      <div class="image-side">
+        <img src="calendar_icon.png" alt="Event Calendar Icon">
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
 
