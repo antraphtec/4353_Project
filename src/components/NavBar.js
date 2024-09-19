@@ -1,6 +1,6 @@
 import React from "react";
 import "./NavBar.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const NavigationBar = () => {
@@ -17,9 +17,9 @@ const NavigationBar = () => {
         <span>CauseConnect</span>
       </div>
       <ul className="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/get-involved">Get Involved</a></li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/get-involved">Get Involved</Link></li>
         <li>
           <button onClick={handleSignInClick} className="sign-in-btn">
             Sign In
@@ -29,7 +29,7 @@ const NavigationBar = () => {
           </a> */}
         </li>
         <li>
-          <a href="/volunteer" className="volunteer-btn">Volunteer</a>
+          <Link to="/volunteer" className="volunteer-btn">Volunteer</Link>
         </li>
       </ul>
     </nav>

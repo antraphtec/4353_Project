@@ -29,7 +29,7 @@ const handleSubmit = (event) => {
         <div className="login-box">
           <button className="back-link">← Back to Home</button>
               
-          <h2>Already a Volunteer? Log In</h2>
+          <h2>Already a {isAdmin ? 'Admin' : 'Volunteer'}? Log In</h2> {/* Change heading based on state */}
 
           <div className="login-toggle">
             <button onClick={() => setIsAdmin(false)} disabled={!isAdmin}>Volunteer Log In</button>
