@@ -1,0 +1,71 @@
+/* Consistent styles with the login page */
+.registration-page-container {
+    display: flex;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+}
+
+.image-section {
+    flex: 2;
+    background-color: #E5F7E5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.palm-earth {
+    width: 60%;
+}
+
+.form-section {
+    flex: 1;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 30px;
+    color: #555;
+}
+
+label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #218838;
+}
