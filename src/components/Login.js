@@ -3,10 +3,12 @@ import "./Login.css";
 //import { Link } from "react-router-dom";
 
 
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isAdmin, setIsAdmin] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
 
 const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,6 +27,8 @@ const handleSubmit = (event) => {
 
       <div className="login-right"></div>
         <div className="login-box">
+          <button className="back-link">← Back to Home</button>
+              
           <h2>Already a Volunteer? Log In</h2>
 
           <div className="login-toggle">
@@ -38,6 +42,7 @@ const handleSubmit = (event) => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
               required
             />
 
@@ -46,8 +51,18 @@ const handleSubmit = (event) => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
               required
             />
+
+            <div className="show-password">
+              <input
+                type="checkbox"
+                id="showPassword"
+                onChange={() => setShowPassword(!showPassword)}
+              />
+              <label htmlFor="showPassword">Show password</label>
+            </div>
 
             <button type="submit">Log In</button>
           </form>

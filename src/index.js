@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Routes } from "react-router-dom
 import NAVBAR from "./components/NavBar";
 import HERO from "./components/hero";
 import Footer from "./components/footer";
+import Login from "./components/Login"; 
 import ProfileManagement from "./components/profileManagement/profileManagementPage.jsx";
 import VolunteerMatching from "./components/matching/matching.jsx";
 
@@ -12,10 +13,11 @@ function App() {
   return (
     <Router>
       <NAVBAR />
-      <Routes> {/* Use Routes instead of Switch */}
-        <Route path="/" element={<HERO />} /> {/* Use element prop */}
-        <Route path="/profile" element={<ProfileManagement />} /> {/* Use element prop */}
-        <Route path="/matching" element={<VolunteerMatching />} /> {/* Use element prop */}
+      <Routes> 
+        <Route path="/" element={<HERO />} /> 
+        <Route path="/profile" element={<ProfileManagement />} /> 
+        <Route path="/matching" element={<VolunteerMatching />} />
+        <Route path="/login" element={<Login />} /> 
       </Routes>
       <Footer />
     </Router>
