@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import NAVBAR from "./components/NavBar.js";
 import HERO from "./components/hero.js";
 import Footer from "./components/footer.js";
-import Login from "./components/Login.js"; 
+import Login from "./components/login/Login.js"; 
 import ProfileManagement from "./components/profileManagement/profileManagementPage.jsx";
 import VolunteerMatching from "./components/matching/matching.jsx";
 import Registration from "./components/registration/registration.js";
