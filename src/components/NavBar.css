@@ -108,7 +108,12 @@
 }
 
 .sign-in-btn:hover {
-  background-color: #3a453a;
+  background-color: #478147;
+  border-color: #3a453a;
+}
+
+.sign-up-btn:hover {
+  background-color: #478147;
   border-color: #3a453a;
 }
 
