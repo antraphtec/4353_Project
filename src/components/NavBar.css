@@ -2,9 +2,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 50px;
-  background-color: #a7d4be;
+  padding: 15px 30px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-bottom: 2px solid #ddd;
+  position: relative;
 }
 
 .logo {
@@ -13,35 +15,110 @@
 }
 
 .logo img {
-  height: 30px;
+  height: 40px;
+  width: 40px;
   margin-right: 10px;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
 }
 
 .nav-links {
   list-style: none;
+  align-items: center;
   display: flex;
   gap: 20px;
+}
+
+.nav-links li {
+  margin-left: 20px; 
 }
 
 .nav-links a {
   text-decoration: none;
   font-size: 16px;
   color: #333;
+  position: relative;
+  padding-bottom: 5px;
 }
 
 .nav-links a:hover {
   color: #007bff;
 }
 
+.nav-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: #475443; 
+  transition: width 0.3s;
+}
+
+.nav-link:hover::after {
+  width: 100%; 
+}
+
 .sign-in-btn {
-  border: 1px solid #333;
-  padding: 5px 10px;
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px; 
+  font-size: 14px; 
+  border: 2px solid transparent;
   border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600; 
+  line-height: 1; 
+  background-color: #475443;
+  color: white;
+  border-color: #475443; 
+}
+
+.volunteer-btn {
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px; 
+  font-size: 16px; 
+  border: 2px solid transparent;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600; 
+  line-height: 1; 
+}
+
+.sign-in-btn:hover {
+  background-color: #3a453a;
+  border-color: #3a453a;
 }
 
 .volunteer-btn {
   background-color: #007bff;
   color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
+  border-color: #007bff;
 }
+
+.sign-in-btn .icon {
+  margin-right: 5px;
+}
+
+
+.volunteer-btn .icon {
+  margin-right: 5px;
+}
+
+.volunteer-btn:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+}
+

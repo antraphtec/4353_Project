@@ -1,9 +1,11 @@
 .login-page-container {
     display: flex;
     height: 100vh;
+    width: 100vw;
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 img{
@@ -13,16 +15,20 @@ img{
 }
 
 .login-left {
-    flex: 2;
+    flex: 1;
     width: 100%;
     background: 
-        url('/public/images/boy.png') center bottom no-repeat,
+        url('/public/images/boy.png') center no-repeat,
         url('/public/images/world.png') center no-repeat, 
         linear-gradient(180deg, #15B1EA 0%, #A8E0EF 40%, #577E73 100%);
     background-size: 65%, contain, cover;
+    background-position: center, center, left bottom; 
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     align-items: center;
+    padding: 0; 
+    margin: 0; 
+    /* width: 100%; */
 }
 
 
@@ -31,6 +37,9 @@ img{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0; 
+    margin: 0; 
+    width: 100%;
 }
 
 .login-box{
@@ -93,6 +102,8 @@ img{
 form {
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
+    align-items: flex-start;
 }
 
 label {
@@ -114,10 +125,21 @@ input{
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    margin-top: -10px;
+    justify-content: flex-start;
+    width: auto;
   }
 
 .show-password input {
     margin-right: 10px;
+    vertical-align: middle; 
+}
+
+.show-password label {
+    font-size: 14px;
+    color: #333; 
+    white-space: nowrap;
+    vertical-align: middle;
 }
 
 button[type="submit"] {
@@ -165,7 +187,7 @@ a:hover {
     text-decoration: underline; 
 }
   
-  .forgot-links a:hover {
+.forgot-links a:hover {
     color: #004499; 
   }
   
