@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  background-color: #FFFFFF;
+  background-color: #a5d7af;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-bottom: 2px solid #ddd;
   position: relative;
@@ -78,6 +78,22 @@
   border-color: #475443; 
 }
 
+.sign-up-btn {
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px; 
+  font-size: 14px; 
+  border: 2px solid transparent;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600; 
+  line-height: 1; 
+  background-color: #475443;
+  color: white;
+  border-color: #475443; 
+}
+
 .volunteer-btn {
   display: inline-flex; 
   align-items: center;
@@ -106,6 +122,9 @@
   margin-right: 5px;
 }
 
+.sign-up-btn .icon {
+  margin-right: 5px;
+}
 
 .volunteer-btn .icon {
   margin-right: 5px;
