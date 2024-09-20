@@ -1,43 +1,42 @@
-import React, { useState } from 'react';
-import './Registration.css';
+// src/components/registration/Registration.js
+import React, { useState } from "react";
+import "./registration.css";
 
 function Registration() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Basic Email validation
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailPattern.test(email)) {
-      alert('Please enter a valid email address.');
-      return;
-    }
-
-    // Phone number validation (example)
     const phonePattern = /^[0-9]{10}$/;
-    if (!phonePattern.test(phone)) {
-      alert('Please enter a valid 10-digit phone number.');
+
+    if (!emailPattern.test(email)) {
+      alert("Please enter a valid email address.");
       return;
     }
 
-    // Form data submission
-    const formData = {
+    if (!phonePattern.test(phone)) {
+      alert("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    const userData = {
       name,
       email,
       phone,
       password,
     };
 
-    console.log('Form submitted:', formData);
-    // You can send `formData` to the server here via API call
+    console.log(userData);
+    alert("Registration Successful!");
   };
 
   return (
-    <div className="registration-page-container">
+    <div className="registration-form-container">
       <div className="image-section">
         <img src="/public/images/palm_earth.png" alt="Hand holding the Earth" className="palm-earth" />
       </div>
@@ -52,9 +51,9 @@ function Registration() {
             type="text"
             id="name"
             name="name"
+            placeholder="Enter your full name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Enter your full name"
             required
           />
 
@@ -63,9 +62,9 @@ function Registration() {
             type="email"
             id="email"
             name="email"
+            placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
             required
           />
 
@@ -74,9 +73,9 @@ function Registration() {
             type="tel"
             id="phone"
             name="phone"
+            placeholder="8023456789"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="Enter your 10-digit phone number"
             required
           />
 
@@ -85,9 +84,9 @@ function Registration() {
             type="password"
             id="password"
             name="password"
+            placeholder="Enter a secure password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter a secure password"
             required
           />
 
@@ -99,8 +98,6 @@ function Registration() {
 }
 
 export default Registration;
-
-
 
 /*import React from 'react';
 import './registration.css';
