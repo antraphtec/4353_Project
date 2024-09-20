@@ -14,14 +14,14 @@
 
 .image-section {
     flex: 1;
-    background-color: #E5F7E5;
+    background-color: #f9f9f9;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .palm-earth {
-    width: 60%;
+    width: 100%;
 }
 
 .form-section {

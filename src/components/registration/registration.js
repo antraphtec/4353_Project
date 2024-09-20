@@ -38,7 +38,7 @@ function Registration() {
   return (
     <div className="registration-form-container">
       <div className="image-section">
-        <img src="/images/palm_earth.png" alt="Hand holding the Earth" className="palm-earth" />
+        <img src="/images/palm_earth_full.png" alt="Hand holding the Earth" className="palm-earth" />
       </div>
 
       <div className="form-section">
