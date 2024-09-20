@@ -6,6 +6,7 @@ import "./Login.css";
 
 function Login() {
   const [email, setEmail] = useState('');
+  const [adminId, setAdminId] = useState('');
   const [password, setPassword] = useState('');
   const [isAdmin, setIsAdmin] = useState(false); 
   const [showPassword, setShowPassword] = useState(false);
@@ -13,8 +14,8 @@ function Login() {
 const handleSubmit = (event) => {
     event.preventDefault();
     const userInfo = {
-      email: email,
-      password: password,
+      identifier: isAdmin ? adminId : email, 
+      password,
       type: isAdmin ? 'Admin' : 'Volunteer'
     };
     console.log(userInfo); 
@@ -29,12 +30,26 @@ const handleSubmit = (event) => {
         <div className="login-box">
           <button className="back-link">← Back to Home</button>
               
-          <h2>Already a {isAdmin ? 'Admin' : 'Volunteer'}? Log In</h2> {/* Change heading based on state */}
+          <h2>Already an {isAdmin ? 'Admin' : 'Volunteer'}? Log In</h2> {/* Change heading based on state */}
 
           <div className="login-toggle">
-            <button onClick={() => setIsAdmin(false)} disabled={!isAdmin}>Volunteer Log In</button>
-            <button onClick={() => setIsAdmin(true)} disabled={isAdmin}>Admin Log In</button>
+            {/* Volunteer Log In Button */}
+            <button
+              onClick={() => setIsAdmin(false)}
+              className={!isAdmin ? 'login-type-button active' : 'login-type-button'}
+            >
+              Volunteer Log In
+            </button>
+
+            {/* Admin Log In Button */}
+            <button
+              onClick={() => setIsAdmin(true)}
+              className={isAdmin ? 'login-type-button active' : 'login-type-button'}
+            >
+              Admin Log In
+            </button>
           </div>
+
 
           <form onSubmit={handleSubmit}>
             <label>Email Address:</label>
