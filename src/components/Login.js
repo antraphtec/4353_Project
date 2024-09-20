@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "./Login.css";
-//import { Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 
 
@@ -11,7 +11,9 @@ function Login() {
   const [isAdmin, setIsAdmin] = useState(false); 
   const [showPassword, setShowPassword] = useState(false);
 
-const handleSubmit = (event) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
     event.preventDefault();
     const userInfo = {
       identifier: isAdmin ? adminId : email, 
@@ -28,9 +30,10 @@ const handleSubmit = (event) => {
 
       <div className="login-right"></div>
         <div className="login-box">
-          <button className="back-link">← Back to Home</button>
+
+          <button className="back-link" onClick={() => navigate('/')}>← Back to Home</button>
               
-          <h2>Already an {isAdmin ? 'Admin' : 'Volunteer'}? Log In</h2> {/* Change heading based on state */}
+          <h2>Already an {isAdmin ? 'Admin' : 'Volunteer'}? Log In</h2> 
 
           <div className="login-toggle">
             {/* Volunteer Log In Button */}
@@ -52,14 +55,29 @@ const handleSubmit = (event) => {
 
 
           <form onSubmit={handleSubmit}>
-            <label>Email Address:</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-            />
+            {!isAdmin ? (
+              <>
+                <label>Email Address:</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+              />
+            </>
+          ) : (
+            <>
+              <label>Admin ID:</label>
+              <input
+                type="text"
+                value={adminId}
+                onChange={(e) => setAdminId(e.target.value)}
+                placeholder="Enter your Admin ID"
+                required
+              />
+            </>
+          )}
 
             <label>Password:</label>
             <input
@@ -79,14 +97,17 @@ const handleSubmit = (event) => {
               <label htmlFor="showPassword">Show password</label>
             </div>
 
-            <button type="submit">Log In</button>
+            <button type="submit" className="login-button">Log In</button>
           </form>
 
-          <a href="/forgot-password">Forgot Password?</a>
+          <div className="forgot-links">
+            <a href="/forgot-password">Forgot Password?</a>
+            {isAdmin && <a href="/forgot-admin-id">Forgot Admin ID?</a>} {/* Show only for Admin */}
+          </div>
         </div>
       </div>
-  );
-}
+    );
+  }
 
 
 export default Login;

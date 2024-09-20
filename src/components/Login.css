@@ -147,9 +147,25 @@ button[type="submit"] {
 input::placeholder {
     color: #b3b3b3; 
     font-size: 14px; 
-  }
+}
 
-  a:hover {
+a:hover {
     color: #004499;
+}
+.forgot-links {
+    text-align: center; 
+    margin-top: 5px; 
+}
+  
+.forgot-links a {
+    display: block;
+    margin-bottom: 1px; 
+    color: #0066cc; 
+    font-size: 14px; 
+    text-decoration: underline; 
+}
+  
+  .forgot-links a:hover {
+    color: #004499; 
   }
   
