@@ -24,7 +24,7 @@ function Login() {
   return (
     <div className="login-page-container">
       <div className="login-left">
-        <img src="/images/boy_full.png" alt="Boy" />
+        {/* <img src="/images/boy_full.png" alt="Boy" /> */}
       </div>
 
       <div className="login-right">
