@@ -8,7 +8,7 @@
     overflow: hidden;
 }
 
-img{
+img {
     width: 100%;
     max-width: 400px;
     height: auto;
@@ -22,27 +22,25 @@ img{
         url('/public/images/world.png') center no-repeat, 
         linear-gradient(180deg, #15B1EA 0%, #A8E0EF 40%, #577E73 100%);
     background-size: 65%, contain, cover;
-    background-position: center, center, left bottom; 
+    background-position: center, center, left bottom;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 0; 
-    margin: 0; 
-    /* width: 100%; */
+    padding: 0;
+    margin: 0;
 }
-
 
 .login-right {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0; 
-    margin: 0; 
+    padding: 0;
+    margin: 0;
     width: 100%;
 }
 
-.login-box{
+.login-box {
     width: 450px;
     padding: 60px;
     background-color: #fff;
@@ -67,7 +65,8 @@ img{
     text-align: center;
     margin-bottom: 20px;
     font-size: 24px;
-    font-weight: 600;}
+    font-weight: 600;
+}
 
 .login-toggle {
     display: flex;
@@ -112,7 +111,7 @@ label {
     font-weight: bold;
 }
 
-input{
+input {
     padding: 14px;
     margin-bottom: 20px;
     font-size: 16px;
@@ -121,31 +120,31 @@ input{
     width: 100%;
 }
 
-.show-password { 
+.show-password {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
     margin-top: -10px;
     justify-content: flex-start;
     width: auto;
-  }
+}
 
 .show-password input {
     margin-right: 10px;
-    vertical-align: middle; 
+    vertical-align: middle;
 }
 
 .show-password label {
     font-size: 14px;
-    color: #333; 
+    color: #333;
     white-space: nowrap;
     vertical-align: middle;
 }
 
 button[type="submit"] {
     padding: 15px;
-    background-color: #475443;  
-    color: white; 
+    background-color: #475443;
+    color: white;
     font-size: 18px;
     border: none;
     cursor: pointer;
@@ -163,31 +162,34 @@ button[type="submit"] {
 }
 
 .login-box a:hover {
-    color: #333
+    color: #333;
 }
 
 input::placeholder {
-    color: #b3b3b3; 
-    font-size: 14px; 
+    color: #b3b3b3;
+    font-size: 14px;
 }
 
 a:hover {
     color: #004499;
 }
+
 .forgot-links {
-    text-align: center; 
-    margin-top: 5px; 
+    text-align: center;
+    margin-top: 5px;
 }
-  
+
 .forgot-links a {
     display: block;
-    margin-bottom: 1px; 
-    color: #0066cc; 
-    font-size: 14px; 
-    text-decoration: underline; 
+    margin-bottom: 1px;
+    color: #0066cc;
+    font-size: 14px;
+    text-decoration: underline;
 }
-  
+
 .forgot-links a:hover {
-    color: #004499; 
-  }
+    color: #004499;
+}
+
+
   
