@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Modal, Box, TextField, Button, Typography } from "@mui/material";
-import "./Login.css";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Login.css';
 
 const Login = () => {
-  const [isAdmin, setIsAdmin] = useState(false); // Toggle between Admin and Volunteer
+  const [isAdmin, setIsAdmin] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [adminId, setAdminId] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [forgotPasswordModal, setForgotPasswordModal] = useState(false); // For modal
-  const [resetEmail, setResetEmail] = useState(""); // Email input for resetting password
+  const [forgotPasswordModal, setForgotPasswordModal] = useState(false);
+  const [forgotAdminIDModal, setForgotAdminIDModal] = useState(false); // Admin ID modal
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -30,7 +29,6 @@ const Login = () => {
       const result = await response.json();
       
       if (response.ok) {
-        // If login is successful
         navigate('/dashboard');
       } else {
         alert('Login failed: ' + result.message);
@@ -38,12 +36,6 @@ const Login = () => {
     } catch (error) {
       alert('Something went wrong, please try again later.');
     }
-  };
-
-  const handlePasswordReset = () => {
-    // Handle password reset email submission
-    alert(`Password reset link sent to: ${resetEmail}`);
-    setForgotPasswordModal(false);
   };
 
   return (
@@ -86,50 +78,38 @@ const Login = () => {
         </form>
 
         <div className="forgot-links">
-          <a onClick={() => setForgotPasswordModal(true)} style={{ cursor: 'pointer' }}>Forgot Password?</a>
-          {isAdmin && <a href="/forgot-admin-id">Forgot Admin ID?</a>}
+          <a href="#" onClick={() => setForgotPasswordModal(true)} style={{ cursor: 'pointer' }}>Forgot Password?</a>
+          {isAdmin && (
+            <a href="#" onClick={() => setForgotAdminIDModal(true)} style={{ cursor: 'pointer' }}>Forgot Admin ID?</a>
+          )}
         </div>
-
-        {/* Modal for password reset */}
-        <Modal
-          open={forgotPasswordModal}
-          onClose={() => setForgotPasswordModal(false)}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={{ ...modalStyle }}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Reset Password
-            </Typography>
-            <TextField
-              fullWidth
-              label="Email Address"
-              type="email"
-              value={resetEmail}
-              onChange={(e) => setResetEmail(e.target.value)}
-              margin="normal"
-            />
-            <Button onClick={handlePasswordReset} variant="contained" fullWidth>
-              Send Reset Link
-            </Button>
-          </Box>
-        </Modal>
       </div>
+
+      {/* Forgot Password Modal */}
+      {forgotPasswordModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h3>Reset Password</h3>
+            <p>Enter your email, and we'll send you instructions to reset your password.</p>
+            <input type="email" placeholder="Enter your email" />
+            <button onClick={() => setForgotPasswordModal(false)}>Send Reset Link</button>
+            <button onClick={() => setForgotPasswordModal(false)} className="close-modal">Close</button>
+          </div>
+        </div>
+      )}
+
+      {/* Forgot Admin ID Modal */}
+      {forgotAdminIDModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h3>Forgot Admin ID</h3>
+            <p>Please contact your system administrator to retrieve your Admin ID.</p>
+            <button onClick={() => setForgotAdminIDModal(false)} className="close-modal">Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
-};
-
-// Modal style
-const modalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-  borderRadius: '8px',
 };
 
 export default Login;
