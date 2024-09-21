@@ -1,17 +1,15 @@
-// src/components/registration/Registration.js
-
-// src/components/registration/Registration.js
 import React, { useState } from "react";
 import "./registration.css";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 
 function Registration() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // New state for toggling password visibility
 
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -43,12 +41,18 @@ function Registration() {
   return (
     <div className="registration-form-container">
       <div className="image-section">
-        <img src="/images/palm_earth_full.png" alt="Hand holding the Earth" className="palm-earth" />
+        <img
+          src="/images/palm_earth_full.png"
+          alt="Hand holding the Earth"
+          className="palm-earth"
+        />
       </div>
 
       <div className="form-section">
         {/* Back to Home button */}
-        <button className="back-link" onClick={() => navigate('/')}>← Back to Home</button>
+        <button className="back-link" onClick={() => navigate("/")}>
+          ← Back to Home
+        </button>
 
         <h1>Be a Changemaker: Volunteer with Us</h1>
         <p>Get started by making an account with us!</p>
@@ -89,7 +93,7 @@ function Registration() {
 
           <label htmlFor="password">Password</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"} // Conditionally change input type
             id="password"
             name="password"
             placeholder="Enter a secure password"
@@ -97,6 +101,17 @@ function Registration() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
+          {/* Show Password Checkbox */}
+          <div className="show-password">
+            <input
+              type="checkbox"
+              id="showPassword"
+              checked={showPassword}
+              onChange={() => setShowPassword(!showPassword)}
+            />
+            <label htmlFor="showPassword">Show password</label>
+          </div>
 
           <button type="submit">Volunteer Now</button>
         </form>
@@ -106,6 +121,7 @@ function Registration() {
 }
 
 export default Registration;
+
 
 /*
 import React, { useState } from "react";
