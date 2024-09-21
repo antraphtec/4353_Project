@@ -7,8 +7,8 @@ const HERO = (props) => {
     <div className="hero-container">
       <div className="herohero1">
         <img
-          src="/external/image113838-puy-1100w.png"
-          alt="image113838"
+          src="/images/world.png"
+          alt="image of the world"
           className="hero-image11"
         />
         <div className="herohero2">
