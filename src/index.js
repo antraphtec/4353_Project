@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import NAVBAR from "./components/NavBar.js";
 import HERO from "./components/hero.js";
 import Footer from "./components/footer.js";
@@ -10,8 +15,6 @@ import VolunteerMatching from "./components/matching/matching.jsx";
 import Registration from "./components/registration/registration.js";
 import EventManagement from "./components/eventManagement/EventManagement.js";
 import { createClient } from "@supabase/supabase-js";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
 
 // Initialize Supabase client
 const supabase = createClient(
@@ -21,14 +24,16 @@ const supabase = createClient(
 
 export default function App() {
   const [session, setSession] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Get session
+    // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
+      setLoading(false); // Mark as done loading
     });
 
-    // Listen to auth changes
+    // Listen for auth changes
     const { data: subscription } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setSession(session);
@@ -38,31 +43,66 @@ export default function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Show login form if not authenticated
-  if (!session) {
-    return <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />;
-  }
+  // Show loading indicator while session is being checked
+  if (loading) return <div>Loading...</div>;
 
-  // Show the app if authenticated
   return (
     <Router>
-      <NAVBAR />
+      <NAVBAR session={session} supabase={supabase} />
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<HERO />} />
         <Route path="/about" element={<HERO />} />
         <Route path="/get-involved" element={<HERO />} />
-        <Route path="/volunteer" element={<div>Volunteer Page</div>} />
-        <Route path="/profile" element={<ProfileManagement />} />
-        <Route path="/matching" element={<VolunteerMatching />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/registration" element={<Registration />} />
-        <Route path="/eventmanagement" element={<EventManagement />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/volunteer"
+          element={session ? <VolunteerMatching /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/profile"
+          element={
+            session ? (
+              <ProfileManagement session={session} supabase={supabase} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/eventmanagement"
+          element={
+            session ? (
+              <EventManagement session={session} supabase={supabase} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+
+        {/* Authentication Routes */}
+        <Route
+          path="/login"
+          element={
+            !session ? <Login supabase={supabase} /> : <Navigate to="/" />
+          }
+        />
+        <Route
+          path="/registration"
+          element={
+            !session ? (
+              <Registration supabase={supabase} />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
       </Routes>
       <Footer />
     </Router>
   );
 }
 
-// Render the app
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);

@@ -2,16 +2,20 @@ import React from "react";
 import "./NavBar.css";
 import { Link, useNavigate } from "react-router-dom";
 
-const NavigationBar = () => {
+const NavigationBar = ({ session, supabase }) => {
   const navigate = useNavigate();
 
   const handleSignInClick = () => {
-    navigate('/login');
+    navigate("/login");
   };
 
-  // Function to navigate to the Sign Up page
   const handleSignUpClick = () => {
-    navigate('/registration');
+    navigate("/registration");
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate("/"); // Redirect to homepage after signing out
   };
 
   return (
@@ -21,29 +25,48 @@ const NavigationBar = () => {
         <span>CauseConnect</span>
       </div>
       <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/get-involved">Get Involved</Link></li>
-
         <li>
-          <button onClick={handleSignInClick} className="sign-in-btn">
-            Sign In
-          </button>
-          {/* {<a href="/signin" className="sign-in-btn">
-            Sign In
-          </a>}*/}
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/get-involved">Get Involved</Link>
         </li>
 
-        <li>
-          <button onClick={handleSignUpClick} className="sign-up-btn">
-            Sign Up
-          </button>
-        </li>
+        {session ? (
+          <>
+            <li>
+              <span>Welcome, {session.user.email}!</span>{" "}
+              {/* Customize to display user's name if available */}
+            </li>
+            <li>
+              <button onClick={handleSignOut} className="sign-out-btn">
+                Sign Out
+              </button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <button onClick={handleSignInClick} className="sign-in-btn">
+                Sign In
+              </button>
+            </li>
+            <li>
+              <button onClick={handleSignUpClick} className="sign-up-btn">
+                Sign Up
+              </button>
+            </li>
+          </>
+        )}
 
         <li>
-          <Link to="/volunteer" className="volunteer-btn">Volunteer</Link>
+          <Link to="/volunteer" className="volunteer-btn">
+            Volunteer
+          </Link>
         </li>
-
       </ul>
     </nav>
   );
