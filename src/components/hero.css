@@ -1,29 +1,30 @@
 .hero-container {
-  width: 100%;
+  width: 100vw; 
   display: flex;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: rgba(255, 251, 242, 1); /* light background */
+  background-color: rgba(255, 251, 242, 1);
+  overflow: hidden; 
 }
 
 .herohero1 {
-  width: 100%;
-  height: 100vh; /* Full height of the viewport */
+  width: 100vw; 
+  height: 100vh; 
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  background-color: rgba(255, 251, 242, 1); /* Same as container */
+  background-color: rgba(255, 251, 242, 1); 
 }
 
 .hero-image11 {
   position: absolute;
-  width: 600px; /* Resize image */
-  height: auto; /* Maintain aspect ratio */
-  left: 0; /* Align to the left */
-  top: 50%; /* Center vertically */
+  width: 100%; 
+  height: auto; 
+  left: 0; 
+  top: 50%; 
   transform: translateY(-50%);
 }
 
@@ -31,100 +32,46 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  width: 100vw; 
+  height: 100vh; 
   position: absolute;
 }
 
 .hero-youngboysandyounggirljumping {
-  width: 500px;
-  height: auto;
+  max-width: 50%; 
+  height: 80%;
   position: relative;
-  left: 0; /* Align to the left */
-  margin-right: 30px; /* Create space between image and text */
+  left: 0;
+  margin-right: 30px; 
 }
 
 .hero-text1 {
   position: relative;
-  color: rgba(0, 0, 0, 1); /* Black text */
-  font-size: 48px; /* Slightly smaller font */
+  color: rgba(0, 0, 0, 1);
+  font-size: 48px;
   font-weight: 700;
   text-align: center;
   line-height: 1.2;
-  margin: 0 30px; /* Add margin to keep it from touching edges */
-  max-width: 700px; /* Limit the width of the text */
+  margin: 0 30px; 
+  max-width: 90vw;
 }
 
 @media (max-width: 768px) {
   .hero-text1 {
-    font-size: 32px; /* Adjust font for smaller screens */
+    font-size: 32px;
     line-height: 1.2;
-    max-width: 90%; /* Make it responsive on smaller screens */
+    max-width: 90%; 
   }
 
   .hero-image11 {
-    width: 350px; /* Adjust image size on mobile */
-    left: 50%; /* Center the image */
+    width: 90vw; 
+    left: 50%; 
     transform: translateX(-50%);
+  }
+
+  .hero-youngboysandyounggirljumping {
+    width: 80vw; 
+    margin-right: 0;
   }
 }
 
-/*.hero-container {
-  width: 100%;
-  display: flex;
-  min-height: 100vh;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-.herohero1 {
-  width: 100%;
-  height: 811px;
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  flex-shrink: 0;
-  background-color: rgba(255, 251, 242, 1);
-}
-.hero-image11 {
-  top: 6px;
-  left: -143px;
-  width: 1026px;
-  height: 805px;
-  position: absolute;
-}
-.herohero2 {
-  top: 3px;
-  left: 0px;
-  width: 1440px;
-  height: 811px;
-  display: flex;
-  position: absolute;
-  align-items: center;
-  flex-shrink: 0;
-  justify-content: flex-end;
-}
-.hero-youngboysandyounggirljumping {
-  top: 203px;
-  left: 30px;
-  width: 559px;
-  height: 567px;
-  position: absolute;
-}
-.hero-text1 {
-  top: 260px;
-  color: rgba(0, 0, 0, 1);
-  right: -22px;
-  width: 787px;
-  height: auto;
-  position: absolute;
-  font-size: 50px;
-  font-style: Bold;
-  text-align: center;
-  font-family: Inter;
-  font-weight: 700;
-  line-height: 55px;
-  font-stretch: normal;
-  text-decoration: none;
-}
-*/

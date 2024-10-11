@@ -7,6 +7,9 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-bottom: 2px solid #ddd;
   position: relative;
+  width: 100vw; 
+  margin: 0; 
+  box-sizing: border-box; 
 }
 
 .logo {
@@ -62,7 +65,7 @@
   width: 100%; 
 }
 
-.sign-in-btn {
+.sign-in-btn, .sign-up-btn {
   display: inline-flex; 
   align-items: center;
   justify-content: center;
@@ -78,37 +81,12 @@
   border-color: #475443; 
 }
 
-.sign-up-btn {
-  display: inline-flex; 
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px; 
-  font-size: 14px; 
-  border: 2px solid transparent;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: 600; 
-  line-height: 1; 
-  background-color: #475443;
-  color: white;
-  border-color: #475443; 
-}
-
-.sign-in-btn:hover {
+.sign-in-btn:hover, .sign-up-btn:hover {
   background-color: #a8dda8;
   border-color: #3a453a;
 }
 
-.sign-up-btn:hover {
-  background-color: #a8dda8;
-  border-color: #3a453a;
-}
-
-.sign-in-btn .icon {
-  margin-right: 5px;
-}
-
-.sign-up-btn .icon {
+.sign-in-btn .icon, .sign-up-btn .icon {
   margin-right: 5px;
 }
 
@@ -116,6 +94,6 @@
   .nav-links {
     flex-direction: column;
     margin-top: 10px;
+    width: 100%; 
   }
 }
-
