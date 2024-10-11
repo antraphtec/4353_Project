@@ -61,12 +61,6 @@ const NavigationBar = ({ session, supabase }) => {
             </li>
           </>
         )}
-
-        <li>
-          <Link to="/volunteer" className="volunteer-btn">
-            Volunteer
-          </Link>
-        </li>
       </ul>
     </nav>
   );

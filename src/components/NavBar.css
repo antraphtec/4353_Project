@@ -94,33 +94,14 @@
   border-color: #475443; 
 }
 
-.volunteer-btn {
-  display: inline-flex; 
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px; 
-  font-size: 16px; 
-  border: 2px solid transparent;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: 600; 
-  line-height: 1; 
-}
-
 .sign-in-btn:hover {
-  background-color: #478147;
+  background-color: #a8dda8;
   border-color: #3a453a;
 }
 
 .sign-up-btn:hover {
-  background-color: #478147;
+  background-color: #a8dda8;
   border-color: #3a453a;
-}
-
-.volunteer-btn {
-  background-color: #007bff;
-  color: white;
-  border-color: #007bff;
 }
 
 .sign-in-btn .icon {
@@ -129,14 +110,6 @@
 
 .sign-up-btn .icon {
   margin-right: 5px;
-}
-
-.volunteer-btn .icon {
-  margin-right: 5px;
-}
-
-.volunteer-btn:hover {
-  background-color: #0056b3;
 }
 
 @media (max-width: 768px) {
