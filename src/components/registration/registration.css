@@ -2,9 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: stretch;
-    max-width: 1200px;
-    width: 100%;
-    height: 100vh; /* Full viewport height */
+    width: 90vw;
+    max-width: 1600px; 
+    height: 100vh; 
     margin: 0 auto;
     background-color: #ca9090;
     border-radius: 10px;
@@ -19,18 +19,18 @@
     align-items: center;
     justify-content: center;
     padding: 0px;
-    height: 100%; /* Ensure full height */
+    height: 100%; 
 }
 
 .palm-earth {
-    width: 100%; /* Ensure the image takes the full width of the section */
-    height: 100%; /* Ensure the image takes the full height of the section */
-    object-fit: cover; /* Makes sure the image covers the section while maintaining aspect ratio */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .form-section {
     flex: 1;
-    padding: 60px 40px;
+    padding: 60px 20px; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -115,15 +115,14 @@ button:hover {
     .registration-form-container {
         flex-direction: column;
         height: auto;
+        width: 100vw; 
     }
 
     .image-section {
-        display: none; /* Hide image section on smaller screens */
+        display: none; 
     }
 
     .form-section {
         padding: 40px 20px;
     }
 }
-
-
