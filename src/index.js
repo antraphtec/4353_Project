@@ -20,9 +20,10 @@ import { createClient } from "@supabase/supabase-js";
 
 // Initialize Supabase client
 const supabase = createClient(
-  "https://ucgkrnaqwrfaerbivysj.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjZ2tybmFxd3JmYWVyYml2eXNqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjUxNjEyMjYsImV4cCI6MjA0MDczNzIyNn0.nWiEXSfP5fDOxEbyeFEGgfeSAzThobRl2HsxQf1yQZY"
+  process.env.REACT_APP_SUPABASE_URL,
+  process.env.REACT_APP_SUPABASE_ANON_KEY
 );
+
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -36,14 +37,18 @@ export default function App() {
     });
 
     // Listen for auth changes
-    const { data: subscription } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setSession(session);
-      }
-    );
+  const {
+    data: { subscription },
+  } = supabase.auth.onAuthStateChange((_event, session) => {
+    setSession(session);
+  });
 
-    return () => subscription.unsubscribe();
-  }, []);
+  // Properly unsubscribe when the component unmounts
+  return () => {
+    subscription?.unsubscribe();
+  };
+}, []);
+
 
   // Show loading indicator while session is being checked
   if (loading) return <div>Loading...</div>;
@@ -58,10 +63,10 @@ export default function App() {
         <Route path="/get-involved" element={<HERO />} />
 
         {/* Protected Routes */}
-        <Route
+        {/* <Route
           path="/volunteer"
           element={session ? <VolunteerMatching /> : <Navigate to="/login" />}
-        />
+        /> */}
         <Route
           path="/profile"
           element={
@@ -100,6 +105,11 @@ export default function App() {
             )
           }
         />
+        <Route
+          path="/volunteer"
+          element={session ? <VolunteerMatching supabase={supabase} /> : <Navigate to="/login" />}
+        />
+
       </Routes>
       <Footer />
     </Router>
