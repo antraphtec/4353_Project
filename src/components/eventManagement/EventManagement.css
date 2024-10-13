@@ -183,3 +183,21 @@ button:hover {
         max-width: 80%;
     }
 }
+
+/* EventManagement.css */
+.events-list 
+{
+    margin-top: 20px;
+}
+  
+.events-list ul 
+{
+list-style-type: none;
+padding: 0;
+}
+  
+.events-list li 
+{
+padding: 10px;
+border-bottom: 1px solid #ddd;
+}  
