@@ -7,6 +7,11 @@
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^6.1.1",
     "@mui/material": "^6.1.1",
+<<<<<<< HEAD
+=======
+    "@supabase/auth-ui-react": "^0.4.7",
+    "@supabase/auth-ui-shared": "^0.1.8",
+>>>>>>> 685b786a003784f29ef36d39c34a64af011fae7e
     "@supabase/supabase-js": "^2.45.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
