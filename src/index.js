@@ -8,13 +8,10 @@ import {
 } from "react-router-dom";
 import NAVBAR from "./components/NavBar.js";
 import HERO from "./components/hero.js";
-<<<<<<< HEAD
 import Footer from "./components/footer.jsx";
 import Login from "./components/login/login.jsx"; 
-=======
-import Footer from "./components/footer.js";
-import Login from "./components/login/login.jsx";
->>>>>>> 685b786a003784f29ef36d39c34a64af011fae7e
+// import Footer from "./components/footer.js";
+// import Login from "./components/login/login.jsx";
 import ProfileManagement from "./components/profileManagement/profileManagementPage.jsx";
 import VolunteerMatching from "./components/matching/matching.jsx";
 import Registration from "./components/registration/registration.js";
