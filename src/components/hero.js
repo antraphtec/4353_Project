@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./hero.css";
 
 const HERO = (props) => {
@@ -8,19 +7,19 @@ const HERO = (props) => {
       <div className="herohero1">
         <img
           src="/images/world.png"
-          alt="image of the world"
+          alt="World map"
           className="hero-image11"
         />
         <div className="herohero2">
           <img
             src="/images/image.png"
-            alt="youngboysandyounggirljumping3838"
+            alt="Young people jumping with joy"
             className="hero-youngboysandyounggirljumping"
           />
           <span className="hero-text1">
             <span>
               Discover volunteer opportunities and learn how you can make an
-              impact in causes you care about.​
+              impact in causes you care about.
             </span>
           </span>
         </div>
@@ -30,3 +29,4 @@ const HERO = (props) => {
 };
 
 export default HERO;
+

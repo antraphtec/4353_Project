@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./NavBar.css";
 import { Link, useNavigate } from "react-router-dom";
 
 const NavigationBar = ({ session, supabase }) => {
   const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      if (session) {
+        const { data, error } = await supabase
+          .from("users")
+          .select("role")
+          .eq("id", session.user.id)
+          .single();
+
+        if (error) {
+          console.error("Error fetching user role:", error);
+        } else if (data && data.role === "admin") {
+          setIsAdmin(true);
+        }
+      }
+    };
+
+    fetchUserRole();
+  }, [session, supabase]);
 
   const handleSignInClick = () => {
     navigate("/login");
@@ -38,9 +59,13 @@ const NavigationBar = ({ session, supabase }) => {
         {session ? (
           <>
             <li>
-              <span>Welcome, {session.user.email}!</span>{" "}
-              {/* Customize to display user's name if available */}
+              <span>Welcome, {session.user.email}!</span>
             </li>
+            {isAdmin && (
+              <li>
+                <Link to="/volunteer">Volunteer Matching</Link>
+              </li>
+            )}
             <li>
               <button onClick={handleSignOut} className="sign-out-btn">
                 Sign Out
