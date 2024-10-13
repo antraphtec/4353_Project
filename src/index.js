@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
 import NAVBAR from "./components/NavBar.js";
 import HERO from "./components/hero.js";
-import Footer from "./components/footer.js";
+import Footer from "./components/footer.jsx";
 import Login from "./components/login/login.jsx"; 
 import ProfileManagement from "./components/profileManagement/profileManagementPage.jsx";
 import VolunteerMatching from "./components/matching/matching.jsx";
