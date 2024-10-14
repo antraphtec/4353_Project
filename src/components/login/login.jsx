@@ -51,22 +51,31 @@ const Login = ({ supabase }) => {
   return (
     <div className="login-page-container">
       <form onSubmit={handleSubmit}>
-        <h2>Log In</h2>
+        <h2>{isAdmin ? "Admin Log In" : "Volunteer Log In"}</h2>
         <div className="login-toggle">
-          <button type="button" onClick={() => setIsAdmin(false)}>
+          <button
+            type="button"
+            onClick={() => setIsAdmin(false)}
+            className={!isAdmin ? "selected" : ""}
+          >
             Volunteer
           </button>
-          <button type="button" onClick={() => setIsAdmin(true)}>
+          <button
+            type="button"
+            onClick={() => setIsAdmin(true)}
+            className={isAdmin ? "selected" : ""}
+          >
             Admin
           </button>
         </div>
 
-        <label>Email:</label>
+        <label>{isAdmin ? "Admin Email:" : "Volunteer Email:"}</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          placeholder={isAdmin ? "admin@example.com" : "volunteer@example.com"}
         />
 
         <label>Password:</label>
@@ -86,7 +95,12 @@ const Login = ({ supabase }) => {
           <label>Show password</label>
         </div>
 
-        <button type="submit">Log In</button>
+        <button
+          type="submit"
+          className={`login-button ${isAdmin ? "admin-button" : "volunteer-button"}`}
+        >
+          {isAdmin ? "Log In as Admin" : "Log In as Volunteer"}
+        </button>
       </form>
     </div>
   );
