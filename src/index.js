@@ -32,7 +32,7 @@ export default function App() {
   const fetchUserRole = async (userId) => {
     try {
       const { data, error } = await supabase
-        .from("users")
+        .from("accounts")
         .select("role")
         .eq("id", userId)
         .single();
