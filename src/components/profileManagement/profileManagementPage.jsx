@@ -60,7 +60,7 @@ const ProfileManagement = ({ supabase }) => {
 
   const fetchProfile = async (email) => {
     const { data, error } = await supabase
-      .from('participation')
+      .from('accounts')
       .select('*')
       .eq('email_address', email)
       .single();
@@ -91,7 +91,7 @@ const ProfileManagement = ({ supabase }) => {
       : [];
 
     const { data, error } = await supabase
-      .from('participation')
+      .from('accounts')
       .upsert(
         {
           email_address: session.user.email, // Primary key
