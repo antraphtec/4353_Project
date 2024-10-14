@@ -136,7 +136,7 @@ button[type="submit"] {
 }
 
 button[type="submit"].admin-submit {
-  background-color: #8b0000; /* Dark red for admin submit */
+  background-color: #4ebb5e; /* Dark red for admin submit */
 }
 
 button[type="submit"].volunteer-submit {
