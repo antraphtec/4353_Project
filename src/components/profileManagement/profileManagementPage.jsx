@@ -19,9 +19,9 @@ const states = [
 ];
 
 const skillsList = [
-  { id: 'js', name: 'JavaScript' },
-  { id: 'react', name: 'React' },
-  { id: 'node', name: 'Node.js' },
+  { id: '1', name: 'Teamwork' },
+  { id: '2', name: 'Organization' },
+  { id: '3', name: 'Tech Skills' }
   // Add more skills as needed
 ];
 
