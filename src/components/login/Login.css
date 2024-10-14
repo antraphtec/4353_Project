@@ -87,11 +87,11 @@
 }
 
 .login-toggle button.volunteer-button.active {
-  background-color: #4682b4; /* Steel blue for volunteer active */
+  background-color: #7cb6c4; /* Steel blue for volunteer active */
 }
 
 .login-toggle button.admin-button.active {
-  background-color: #8b0000; /* Dark red for admin active */
+  background-color: #9dc07b; /* Dark red for admin active */
 }
 
 /* Input fields styling */
