@@ -99,94 +99,96 @@ const AdminDashboard = ({ supabase }) => {
   };
 
   return (
-    <div>
-      <h2>Admin Dashboard</h2>
+    <div className="admin-dashboard">
+      <div className="dashboard-header">
+        <h1>Admin Dashboard</h1>
+        <Button variant="contained" color="primary" onClick={() => handleOpenDialog()}>
+          Add Event
+        </Button>
+      </div>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <>
-          <Button variant="contained" color="primary" onClick={() => handleOpenDialog()}>
-            Add Event
-          </Button>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Event Name</TableCell>
-                  <TableCell>Description</TableCell>
-                  <TableCell>Location</TableCell>
-                  <TableCell>Actions</TableCell>
+        <TableContainer component={Paper} className="dashboard-content">
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Event Name</TableCell>
+                <TableCell>Description</TableCell>
+                <TableCell>Location</TableCell>
+                <TableCell>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {events.map((event) => (
+                <TableRow key={event.id} className="card">
+                  <TableCell className="card-title">{event.name}</TableCell>
+                  <TableCell className="card-content">{event.desc}</TableCell>
+                  <TableCell className="card-content">{event.location}</TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => handleDeleteEvent(event.id)}
+                      className="card-button"
+                    >
+                      Delete
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => handleOpenDialog(event)}
+                      className="card-button"
+                    >
+                      Edit
+                    </Button>
+                  </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {events.map((event) => (
-                  <TableRow key={event.id}>
-                    <TableCell>{event.name}</TableCell>
-                    <TableCell>{event.desc}</TableCell>
-                    <TableCell>{event.location}</TableCell>
-                    <TableCell>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={() => handleDeleteEvent(event.id)}
-                      >
-                        Delete
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleOpenDialog(event)}
-                      >
-                        Edit
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-
-          {/* Dialog for Adding/Editing Events */}
-          <Dialog open={openDialog} onClose={handleCloseDialog}>
-            <DialogTitle>{currentEvent ? 'Edit Event' : 'Add Event'}</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                margin="dense"
-                label="Event Name"
-                type="text"
-                fullWidth
-                value={eventDetails.name}
-                onChange={(e) => setEventDetails({ ...eventDetails, name: e.target.value })}
-              />
-              <TextField
-                margin="dense"
-                label="Description"
-                type="text"
-                fullWidth
-                value={eventDetails.desc}
-                onChange={(e) => setEventDetails({ ...eventDetails, desc: e.target.value })}
-              />
-              <TextField
-                margin="dense"
-                label="Location"
-                type="text"
-                fullWidth
-                value={eventDetails.location}
-                onChange={(e) => setEventDetails({ ...eventDetails, location: e.target.value })}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseDialog} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={handleSaveEvent} color="primary">
-                Save
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
+
+      {/* Dialog for Adding/Editing Events */}
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle>{currentEvent ? 'Edit Event' : 'Add Event'}</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Event Name"
+            type="text"
+            fullWidth
+            value={eventDetails.name}
+            onChange={(e) => setEventDetails({ ...eventDetails, name: e.target.value })}
+          />
+          <TextField
+            margin="dense"
+            label="Description"
+            type="text"
+            fullWidth
+            value={eventDetails.desc}
+            onChange={(e) => setEventDetails({ ...eventDetails, desc: e.target.value })}
+          />
+          <TextField
+            margin="dense"
+            label="Location"
+            type="text"
+            fullWidth
+            value={eventDetails.location}
+            onChange={(e) => setEventDetails({ ...eventDetails, location: e.target.value })}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleSaveEvent} color="primary">
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

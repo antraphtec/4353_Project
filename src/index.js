@@ -164,28 +164,28 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  useEffect(() => {
-    // Function to fetch user role
-    const fetchUserRole = async (userId) => {
-      try {
-        const { data, error } = await supabase
-          .from("users")
-          .select("role")
-          .eq("id", userId)
-          .single();
+  // Function to fetch user role
+  const fetchUserRole = async (userId) => {
+    try {
+      const { data, error } = await supabase
+        .from("users")
+        .select("role")
+        .eq("id", userId)
+        .single();
 
-        if (error) {
-          console.error("Error fetching user role:", error);
-        } else if (data && data.role === "admin") {
-          setIsAdmin(true);
-        } else {
-          setIsAdmin(false);
-        }
-      } catch (error) {
-        console.error("Unexpected error fetching user role:", error);
+      if (error) {
+        console.error("Error fetching user role:", error);
+      } else if (data && data.role === "admin") {
+        setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
       }
-    };
+    } catch (error) {
+      console.error("Unexpected error fetching user role:", error);
+    }
+  };
 
+  useEffect(() => {
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -196,22 +196,22 @@ export default function App() {
     });
 
     // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      if (session) {
-        fetchUserRole(session.user.id);
-      } else {
-        setIsAdmin(false); // Reset admin status when not logged in
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+        if (session) {
+          fetchUserRole(session.user.id);
+        } else {
+          setIsAdmin(false); // Reset admin status when not logged in
+        }
       }
-    });
+    );
 
     // Properly unsubscribe when the component unmounts
     return () => {
-      subscription?.unsubscribe();
+      authListener?.unsubscribe();
     };
-  }, [supabase]);
+  }, []);
 
   // Show loading indicator while session is being checked
   if (loading) return <div>Loading...</div>;
