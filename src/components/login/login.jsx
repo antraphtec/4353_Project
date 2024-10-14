@@ -6,6 +6,7 @@ const Login = ({ supabase }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [adminId, setAdminId] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -13,36 +14,48 @@ const Login = ({ supabase }) => {
     event.preventDefault();
 
     try {
-      // Authenticate the user using Supabase Auth
-      const { data: session, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      let response;
+
+      if (isAdmin) {
+        // Assuming admins use a unique email format for login
+        response = await supabase.auth.signInWithPassword({
+          email: `${adminId}@yourdomain.com`,
+          password,
+        });
+      } else {
+        // Volunteer login
+        response = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+      }
+
+      if (response.error) {
+        throw response.error;
+      }
+
+      // On successful login, check user role
+      const userId = response.data.user.id;
+
+      // Fetch the role from the "accounts" table
+      const { data, error } = await supabase
+        .from("accounts")
+        .select("role")
+        .eq("id", userId)
+        .single();
 
       if (error) {
+        console.error("Error fetching user role:", error);
         throw error;
       }
 
-      if (session) {
-        // Fetch user role from the "accounts" table
-        const { data, error: roleError } = await supabase
-          .from("accounts")
-          .select("role")
-          .eq("email_address", email)
-          .single();
-
-        if (roleError) {
-          throw roleError;
-        }
-
-        if (data.role === "admin") {
-          // Redirect to the admin dashboard
-          navigate("/admin");
-        } else {
-          // Redirect to the volunteer profile management page
-          navigate("/profile");
-        }
+      // Navigate based on user role
+      if (data.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/profile");
       }
+
     } catch (error) {
       alert("Login failed: " + error.message);
     }
@@ -55,28 +68,41 @@ const Login = ({ supabase }) => {
         <div className="login-toggle">
           <button
             type="button"
+            className={`volunteer-button ${!isAdmin ? "active" : ""}`}
             onClick={() => setIsAdmin(false)}
-            className={!isAdmin ? "selected" : ""}
           >
             Volunteer
           </button>
           <button
             type="button"
+            className={`admin-button ${isAdmin ? "active" : ""}`}
             onClick={() => setIsAdmin(true)}
-            className={isAdmin ? "selected" : ""}
           >
             Admin
           </button>
         </div>
 
-        <label>{isAdmin ? "Admin Email:" : "Volunteer Email:"}</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          placeholder={isAdmin ? "admin@example.com" : "volunteer@example.com"}
-        />
+        {isAdmin ? (
+          <>
+            <label>Admin ID:</label>
+            <input
+              type="text"
+              value={adminId}
+              onChange={(e) => setAdminId(e.target.value)}
+              required
+            />
+          </>
+        ) : (
+          <>
+            <label>Email:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </>
+        )}
 
         <label>Password:</label>
         <input
@@ -86,7 +112,7 @@ const Login = ({ supabase }) => {
           required
         />
 
-        <div>
+        <div className="show-password">
           <input
             type="checkbox"
             checked={showPassword}
@@ -95,11 +121,8 @@ const Login = ({ supabase }) => {
           <label>Show password</label>
         </div>
 
-        <button
-          type="submit"
-          className={`login-button ${isAdmin ? "admin-button" : "volunteer-button"}`}
-        >
-          {isAdmin ? "Log In as Admin" : "Log In as Volunteer"}
+        <button type="submit" className={isAdmin ? "admin-submit" : "volunteer-submit"}>
+          Log In
         </button>
       </form>
     </div>
