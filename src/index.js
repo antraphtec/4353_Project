@@ -128,10 +128,11 @@ export default function App() {
             session && isAdmin ? (
               <AdminDashboard supabase={supabase} />
             ) : (
-              <Navigate to="/" />
+              <Navigate to="/login" />
             )
           }
         />
+
 
         {/* Authentication Routes */}
         <Route
