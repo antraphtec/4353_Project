@@ -162,6 +162,20 @@ button:hover {
     margin: 0 auto; /* Horizontally centers the image within its container */
 }
 
+.events-list {
+    margin-top: 20px;
+}
+  
+.events-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+  
+.events-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
