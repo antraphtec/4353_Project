@@ -1,14 +1,14 @@
 /* Container for the login page */
 .login-page-container {
   display: flex;
-  height: 55vh; /* Full height */
-  width: 80vw; /* Full screen width */
+  height: 55vh;
+  width: 80vw;
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
   margin-left: 190px;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center;
+  align-items: center;
 }
 
 /* Left image section with shared background (world + gradient) */
@@ -22,14 +22,14 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  height: 100%; /* Ensure it fills the full height */
+  height: 100%;
 }
   
-  /* Adjust the image position based on admin or volunteer */
-  .login-left img {
+/* Adjust the image position based on admin or volunteer */
+.login-left img {
   max-width: 80%;
   height: auto;
-  }
+}
 
 /* Right form container */
 .login-right h2 {
@@ -57,14 +57,6 @@
   text-decoration: underline;
 }
 
-/* Form title */
-.login-right h2 {
-  font-size: 28px;
-  color: #1d1d1d;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
 /* Login toggle (Volunteer/Admin buttons) */
 .login-toggle {
   display: flex;
@@ -77,17 +69,29 @@
   padding: 14px;
   margin: 0 5px;
   cursor: pointer;
-  background-color: #e5e5e5;
-  color: #475443;
   border: none;
   border-radius: 6px;
   font-size: 16px;
   font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-toggle button {
+  background-color: #e5e5e5;
+  color: #475443;
 }
 
 .login-toggle button.active {
-  background-color: #475443;
+  background-color: #475443; /* Dark color for active */
   color: white;
+}
+
+.login-toggle button.volunteer-button.active {
+  background-color: #4682b4; /* Steel blue for volunteer active */
+}
+
+.login-toggle button.admin-button.active {
+  background-color: #8b0000; /* Dark red for admin active */
 }
 
 /* Input fields styling */
@@ -131,6 +135,14 @@ button[type="submit"] {
   transition: background-color 0.3s ease;
 }
 
+button[type="submit"].admin-submit {
+  background-color: #8b0000; /* Dark red for admin submit */
+}
+
+button[type="submit"].volunteer-submit {
+  background-color: #4682b4; /* Steel blue for volunteer submit */
+}
+
 button[type="submit"]:hover {
   background-color: #3a453a;
 }
@@ -160,41 +172,32 @@ button[type="submit"]:hover {
     padding: 20px;
   }
   .login-left {
-    display: none; /* Hide left section on mobile */
+    display: none;
   }
   .login-right {
     padding: 20px;
-    max-width: 100%; /* Use full width on small screens */
-    margin: 0; /* No horizontal margins on mobile */
+    max-width: 100%;
+    margin: 0;
   }
-}
-
-.forgot-links a {
-  color: #0066cc;
-  text-decoration: underline;
-}
-
-.forgot-links a:hover {
-  color: #004499;
 }
 
 button {
   cursor: pointer;
 }
 
-
 .link-button {
-background: none;
-border: none;
-color: #0066cc;
-text-decoration: underline;
-cursor: pointer;
-font-size: 14px;
+  background: none;
+  border: none;
+  color: #0066cc;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .link-button:hover {
-color: #004499;
+  color: #004499;
 }
+
 .modal-overlay {
   position: fixed;
   top: 0;
