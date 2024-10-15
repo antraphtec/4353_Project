@@ -8,16 +8,26 @@ import {
   Typography,
   Box,
   Divider,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
 } from '@mui/material';
 import ProfileManagement from '../profileManagement/profileManagementPage';
 import VolunteerMatching from '../matching/matching';
 import EventManagement from '../eventManagement/EventManagement';
 import './AdminDashboard.css';
+import { format } from 'date-fns';
 
 const AdminDashboard = ({ supabase }) => {
   const [selectedView, setSelectedView] = useState('manageEvents');
   const [isAdmin, setIsAdmin] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [events, setEvents] = useState([]);
+  const [loadingEvents, setLoadingEvents] = useState(true);
 
   useEffect(() => {
     const checkAdminStatus = async () => {
@@ -39,6 +49,25 @@ const AdminDashboard = ({ supabase }) => {
       setLoading(false);
     };
     checkAdminStatus();
+  }, [supabase]);
+
+  // Fetch events on load
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const { data, error } = await supabase.from('events').select('*');
+        if (error) {
+          console.error('Error fetching events:', error);
+        } else {
+          setEvents(data);
+        }
+      } catch (err) {
+        console.error('Error fetching events:', err);
+      } finally {
+        setLoadingEvents(false);
+      }
+    };
+    fetchEvents();
   }, [supabase]);
 
   const handleSelectView = (view) => {
@@ -79,6 +108,9 @@ const AdminDashboard = ({ supabase }) => {
             <ListItem button onClick={() => handleSelectView('volunteerMatching')}>
               <ListItemText primary="Volunteer Matching" />
             </ListItem>
+            <ListItem button onClick={() => handleSelectView('viewEvents')}>
+              <ListItemText primary="View Events" />
+            </ListItem>
             <ListItem button onClick={() => handleSelectView('notifications')}>
               <ListItemText primary="Send/Schedule Notifications" />
             </ListItem>
@@ -99,6 +131,7 @@ const AdminDashboard = ({ supabase }) => {
             {selectedView === 'profileManagement' && 'Profile Management'}
             {selectedView === 'manageEvents' && 'Manage Events'}
             {selectedView === 'volunteerMatching' && 'Volunteer Matching'}
+            {selectedView === 'viewEvents' && 'View Events'}
             {selectedView === 'notifications' && 'Send/Schedule Notifications'}
             {selectedView === 'volunteerHistory' && 'Volunteer History'}
           </Typography>
@@ -111,6 +144,40 @@ const AdminDashboard = ({ supabase }) => {
           )}
           {selectedView === 'volunteerMatching' && (
             <VolunteerMatching supabase={supabase} />
+          )}
+          {selectedView === 'viewEvents' && (
+            loadingEvents ? (
+              <p>Loading events...</p>
+            ) : (
+              <TableContainer component={Paper} className="dashboard-content">
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Event Name</TableCell>
+                      <TableCell>Description</TableCell>
+                      <TableCell>Location</TableCell>
+                      <TableCell>Date & Time</TableCell>
+                      <TableCell>Skills</TableCell>
+                      <TableCell>Urgency</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {events.map((event) => (
+                      <TableRow key={event.id}>
+                        <TableCell>{event.name}</TableCell>
+                        <TableCell>{event.description}</TableCell>
+                        <TableCell>{event.location}</TableCell>
+                        <TableCell>{event.date ? format(new Date(event.date), 'MMMM d, yyyy h:mm a') : 'No Date Available'}</TableCell>
+                        <TableCell>
+                          {event.skills && event.skills.length > 0 ? event.skills.join(', ') : 'No Skills Available'}
+                        </TableCell>
+                        <TableCell>{event.urgency}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )
           )}
           {selectedView === 'notifications' && (
             <div>

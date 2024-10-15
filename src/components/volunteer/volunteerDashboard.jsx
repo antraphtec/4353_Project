@@ -81,7 +81,7 @@ const VolunteerDashboard = ({ supabase }) => {
                   <TableCell>Event Name</TableCell>
                   <TableCell>Description</TableCell>
                   <TableCell>Location</TableCell>
-                  <TableCell>Date</TableCell>
+                  <TableCell>Date & Time</TableCell>
                   <TableCell>Skills</TableCell>
                   <TableCell>Urgency</TableCell>
                 </TableRow>
