@@ -1,4 +1,3 @@
-// src/components/profileManagement/profileManagementPage.jsx
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import {
@@ -25,8 +24,8 @@ const skillsList = [
   // Add more skills as needed
 ];
 
-const ProfileManagement = ({ supabase }) => {
-  const [session, setSession] = useState(null); // Session state
+const ProfileManagement = ({ supabase, profileEmail = null, isAdmin = false }) => {
+  const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const {
@@ -47,16 +46,21 @@ const ProfileManagement = ({ supabase }) => {
   });
 
   useEffect(() => {
-    // Fetch session on mount
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      if (session) {
-        console.log('Current user session:', session);
-        fetchProfile(session.user.email);
-      }
+    if (profileEmail) {
+      // If profileEmail is provided, fetch the profile for that email (used by admins)
+      fetchProfile(profileEmail);
       setLoading(false);
-    });
-  }, [supabase]);
+    } else {
+      // Fetch session on mount for the logged-in user (used by volunteers themselves)
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        setSession(session);
+        if (session) {
+          fetchProfile(session.user.email);
+        }
+        setLoading(false);
+      });
+    }
+  }, [supabase, profileEmail]);
 
   const fetchProfile = async (email) => {
     const { data, error } = await supabase
@@ -84,7 +88,6 @@ const ProfileManagement = ({ supabase }) => {
   const handleProfileUpdate = async (formData) => {
     console.log('Form Data:', formData);
 
-    // Ensure non-empty arrays
     const updatedSkills = formData.skills.length ? formData.skills : [];
     const updatedAvailability = formData.availability
       ? formData.availability.split(',').map((date) => date.trim())
@@ -94,7 +97,7 @@ const ProfileManagement = ({ supabase }) => {
       .from('accounts')
       .upsert(
         {
-          email_address: session.user.email, // Primary key
+          email_address: profileEmail || session.user.email, // Use profileEmail if provided, otherwise current user email
           fullName: formData.fullName,
           address1: formData.address1,
           city: formData.city,
@@ -103,7 +106,7 @@ const ProfileManagement = ({ supabase }) => {
           skills: updatedSkills,
           availability: updatedAvailability,
         },
-        { onConflict: 'email_address' } // Conflict target should be a string
+        { onConflict: 'email_address' }
       );
 
     if (error) {
@@ -116,13 +119,13 @@ const ProfileManagement = ({ supabase }) => {
 
   if (loading) return <div>Loading...</div>;
 
-  return session ? (
+  return (
     <div className="profile-management-container">
       <div className="profile-image">
         <img src="/images/profmanagementimg.png" alt="Profile Management Illustration" />
       </div>
       <div className="form-container">
-        <h2>Profile Management</h2>
+        <h2>{isAdmin ? "Admin: Edit Volunteer Profile" : "Profile Management"}</h2>
         <form onSubmit={handleSubmit(handleProfileUpdate)}>
           {/* Full Name */}
           <Controller
@@ -286,8 +289,6 @@ const ProfileManagement = ({ supabase }) => {
         </form>
       </div>
     </div>
-  ) : (
-    <div>Loading...</div>
   );
 };
 
