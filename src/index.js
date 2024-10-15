@@ -100,6 +100,8 @@ export default function App() {
             )
           }
         />
+
+{/*
         <Route
           path="/eventmanagement"
           element={
@@ -110,6 +112,13 @@ export default function App() {
             )
           }
         />
+*/}
+
+<Route
+  path="/eventmanagement"
+  element={<EventManagement supabase={supabase} />}
+/>
+{/*
         <Route
           path="/volunteer"
           element={
@@ -120,8 +129,15 @@ export default function App() {
             )
           }
         />
+*/}
+
+<Route
+  path="/volunteer"
+  element={<VolunteerMatching supabase={supabase} />}
+/>
 
         {/* Admin Route */}
+  
         {/* <Route
           path="/admin"
           element={
@@ -137,11 +153,10 @@ export default function App() {
           }
         /> */}
 
-        <Route
-          path="/admin"
-          element={<AdminDashboard supabase={supabase} />}
-        />
-
+      <Route
+        path="/admin"
+        element={<AdminDashboard supabase={supabase} />}
+      />
 
         {/* Authentication Routes */}
         <Route
