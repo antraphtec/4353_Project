@@ -132,7 +132,7 @@ export default function App() {
               isAdmin ? (
                 <AdminDashboard supabase={supabase} />
               ) : (
-                <Navigate to="/volunteer" />
+                <Navigate to="/" /> // Redirect to home if user is not an admin
               )
             ) : (
               <Navigate to="/login" />
