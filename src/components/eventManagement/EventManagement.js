@@ -1,6 +1,13 @@
-// src/components/eventManagement/EventManagement.js
 import React, { useState } from "react";
 import "./EventManagement.css";
+import { createClient } from "@supabase/supabase-js";
+
+
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.REACT_APP_SUPABASE_URL,
+  process.env.REACT_APP_SUPABASE_ANON_KEY
+);
 
 function EventManagement() {
   const [eventName, setEventName] = useState("");
@@ -10,25 +17,47 @@ function EventManagement() {
   const [skills, setSkills] = useState([]);
   const [eventDate, setEventDate] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!eventName || !eventDescription || !location || !urgency || !skills.length || !eventDate) {
+    if (
+      !eventName ||
+      !eventDescription ||
+      !location ||
+      !urgency ||
+      !skills.length ||
+      !eventDate
+    ) {
       alert("Please fill out all required fields.");
       return;
     }
 
     const eventData = {
-      eventName,
-      eventDescription,
+      name: eventName,
+      description: eventDescription,
       location,
       urgency,
       skills,
-      eventDate,
+      date: eventDate,
     };
 
-    console.log(eventData);
-    alert("Event Published Successfully!");
+    try {
+      console.log("Sending event data to Supabase:", eventData);
+
+      const { data, error } = await supabase.from("events").insert([eventData]);
+      
+      if (error) {
+        console.error("Supabase insert error:", error);
+        alert("Something went wrong while saving the event: " + error.message);
+        return;
+      }
+
+      alert("Event Published Successfully!");
+      console.log("Supabase response:", data);
+    } catch (error) {
+      console.error("Unexpected error creating event:", error.message);
+      alert("Unexpected error occurred, please try again later.");
+    }
   };
 
   const handleSkillsChange = (e) => {
@@ -45,7 +74,9 @@ function EventManagement() {
     <div className="container">
       <div className="form-side">
         <h2>Manage Events</h2>
-        <p className="subheading">As administrator, you can create and edit existing events here.</p>
+        <p className="subheading">
+          As administrator, you can create and edit existing events here.
+        </p>
         <p className="form-title">Please Fill Out The Form</p>
         <form id="event-form" onSubmit={handleSubmit}>
           <label htmlFor="event-name">Name of Event</label>
@@ -99,69 +130,17 @@ function EventManagement() {
 
           <label htmlFor="skills">Required Skills</label>
           <div className="checkbox-group">
-            <label>
-              <input
-                type="checkbox"
-                value="leadership"
-                checked={skills.includes("leadership")}
-                onChange={handleSkillsChange}
-              />
-              Leadership
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="communication"
-                checked={skills.includes("communication")}
-                onChange={handleSkillsChange}
-              />
-              Communication
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="time-management"
-                checked={skills.includes("time-management")}
-                onChange={handleSkillsChange}
-              />
-              Time Management
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="problem-solving"
-                checked={skills.includes("problem-solving")}
-                onChange={handleSkillsChange}
-              />
-              Problem Solving
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="construction"
-                checked={skills.includes("construction")}
-                onChange={handleSkillsChange}
-              />
-              Construction
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="organization"
-                checked={skills.includes("organization")}
-                onChange={handleSkillsChange}
-              />
-              Organization
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="teamwork"
-                checked={skills.includes("teamwork")}
-                onChange={handleSkillsChange}
-              />
-              Teamwork
-            </label>
+            {["leadership", "communication", "time-management", "problem-solving", "construction", "organization", "teamwork"].map((skill) => (
+              <label key={skill}>
+                <input
+                  type="checkbox"
+                  value={skill}
+                  checked={skills.includes(skill)}
+                  onChange={handleSkillsChange}
+                />
+                {skill.charAt(0).toUpperCase() + skill.slice(1)}
+              </label>
+            ))}
           </div>
 
           <label htmlFor="event-date">Event Date & Time</label>
@@ -178,9 +157,12 @@ function EventManagement() {
         </form>
       </div>
       <div className="image-section">
-        <img className="event-image" src="/images/calendar_icon.png" alt="Event Calendar Icon" />
-    </div>
-
+        <img
+          className="event-image"
+          src="/images/calendar_icon.png"
+          alt="Event Calendar Icon"
+        />
+      </div>
     </div>
   );
 }
