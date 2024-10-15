@@ -122,7 +122,7 @@ export default function App() {
         />
 
         {/* Admin Route */}
-        <Route
+        {/* <Route
           path="/admin"
           element={
             session && isAdmin ? (
@@ -131,6 +131,11 @@ export default function App() {
               <Navigate to="/login" />
             )
           }
+        /> */}
+        
+        <Route
+          path="/admin"
+          element={<AdminDashboard supabase={supabase} />}
         />
 
 
