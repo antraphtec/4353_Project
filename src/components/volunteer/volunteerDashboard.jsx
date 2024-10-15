@@ -1,3 +1,4 @@
+// Your existing imports
 import React, { useState, useEffect } from 'react';
 import {
   Button,
@@ -15,6 +16,9 @@ import {
 } from '@mui/material';
 import ProfileManagement from '../profileManagement/profileManagementPage';
 import './volunteerDashboard.css';
+
+// Import date formatting function
+import { format } from 'date-fns';
 
 const VolunteerDashboard = ({ supabase }) => {
   const [activePage, setActivePage] = useState('Profile Management');
@@ -77,18 +81,22 @@ const VolunteerDashboard = ({ supabase }) => {
                   <TableCell>Event Name</TableCell>
                   <TableCell>Description</TableCell>
                   <TableCell>Location</TableCell>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Skills</TableCell>
                   <TableCell>Urgency</TableCell>
-                  <TableCell>Date & Time</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {events.map((event) => (
                   <TableRow key={event.id}>
                     <TableCell>{event.name}</TableCell>
-                    <TableCell>{event.desc}</TableCell>
+                    <TableCell>{event.description}</TableCell>
                     <TableCell>{event.location}</TableCell>
+                    <TableCell>{event.date ? format(new Date(event.date), 'MMMM d, yyyy h:mm a') : 'No Date Available'}</TableCell>
+                    <TableCell>
+                      {event.skills && event.skills.length > 0 ? event.skills.join(', ') : 'No Skills Available'}
+                    </TableCell>
                     <TableCell>{event.urgency}</TableCell>
-                    <TableCell>{event.dateTime}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
