@@ -31,8 +31,8 @@
 
 .nav-links {
   list-style: none;
-  align-items: center;
   display: flex;
+  align-items: center;
   gap: 20px;
 }
 
@@ -52,6 +52,12 @@
   color: #007bff;
 }
 
+.nav-links span {
+  font-size: 16px;
+  color: #333;
+  margin-left: 10px;
+}
+
 .nav-link::after {
   content: '';
   display: block;
@@ -65,7 +71,7 @@
   width: 100%; 
 }
 
-.sign-in-btn, .sign-up-btn {
+.sign-in-btn, .sign-up-btn, .sign-out-btn {
   display: inline-flex; 
   align-items: center;
   justify-content: center;
@@ -81,7 +87,7 @@
   border-color: #475443; 
 }
 
-.sign-in-btn:hover, .sign-up-btn:hover {
+.sign-in-btn:hover, .sign-up-btn:hover, .sign-out-btn:hover {
   background-color: #a8dda8;
   border-color: #3a453a;
 }

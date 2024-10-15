@@ -10,9 +10,9 @@ const NavigationBar = ({ session, supabase }) => {
     const fetchUserRole = async () => {
       if (session) {
         const { data, error } = await supabase
-          .from("users")
+          .from("accounts") // Ensure the table name matches your Supabase table
           .select("role")
-          .eq("id", session.user.id)
+          .eq("email_address", session.user.email)
           .single();
 
         if (error) {
@@ -59,13 +59,11 @@ const NavigationBar = ({ session, supabase }) => {
         {session ? (
           <>
             <li>
+              <Link to={isAdmin ? "/admin" : "/volunteer"}>Profile</Link>
+            </li>
+            <li>
               <span>Welcome, {session.user.email}!</span>
             </li>
-            {isAdmin && (
-              <li>
-                <Link to="/volunteer">Volunteer Matching</Link>
-              </li>
-            )}
             <li>
               <button onClick={handleSignOut} className="sign-out-btn">
                 Sign Out
