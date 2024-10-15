@@ -34,7 +34,7 @@ export default function App() {
       const { data, error } = await supabase
         .from("accounts")
         .select("role")
-        .eq("id", userId)
+        .eq("email_address") // Use email_address to find the user
         .single();
 
       if (error) {
