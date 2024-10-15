@@ -39,18 +39,14 @@ function Registration() {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
-        options: {
-          data: {
-            // Optional: additional user metadata
-            name,
-            phone,
-          },
-        },
       });
 
       if (error) {
         alert("Registration failed: " + error.message);
-      } else {
+        return;
+      }
+
+      if (data.user) {
         // Create user record in "accounts" table
         const { error: insertError } = await supabase.from("accounts").insert([
           {
@@ -63,7 +59,7 @@ function Registration() {
 
         if (insertError) {
           console.error("Error creating account in database:", insertError);
-          alert("Something went wrong, please try again later.");
+          alert("Something went wrong when creating your profile. Please try again later.");
         } else {
           alert(
             "Registration successful! Please check your email for verification."
