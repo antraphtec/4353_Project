@@ -35,7 +35,7 @@ const Login = ({ supabase }) => {
       }
 
       // On successful login, check user role
-      const userId = response.data.user.id;
+      //const userId = response.data.user.id;
 
       // Fetch the role from the "accounts" table
       const { data, error } = await supabase

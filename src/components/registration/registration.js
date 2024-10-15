@@ -15,6 +15,7 @@ function Registration() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [role, setRole] = useState("volunteer");
 
   const navigate = useNavigate();
 
@@ -51,16 +52,32 @@ function Registration() {
       if (error) {
         alert("Registration failed: " + error.message);
       } else {
-        alert(
-          "Registration successful! Please check your email for verification."
-        );
-        navigate("/login"); // Redirect to login page after successful registration
+        // Create user record in "accounts" table
+        const { error: insertError } = await supabase.from("accounts").insert([
+          {
+            fullName: name,
+            email_address: email,
+            phone,
+            role,
+          },
+        ]);
+
+        if (insertError) {
+          console.error("Error creating account in database:", insertError);
+          alert("Something went wrong, please try again later.");
+        } else {
+          alert(
+            "Registration successful! Please check your email for verification."
+          );
+          navigate("/login"); // Redirect to login page after successful registration
+        }
       }
     } catch (error) {
       console.error("Registration error:", error);
       alert("Something went wrong, please try again later.");
     }
   };
+
 
   return (
     <div className="registration-form-container">
@@ -135,7 +152,18 @@ function Registration() {
             <label htmlFor="showPassword">Show password</label>
           </div>
 
-          <button type="submit">Volunteer Now</button>
+          <label htmlFor="role">Role</label>
+          <select
+            id="role"
+            name="role"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+          >
+            <option value="volunteer">Volunteer</option>
+            <option value="admin">Admin</option>
+          </select>
+
+          <button type="submit">Register Now</button>
         </form>
       </div>
     </div>

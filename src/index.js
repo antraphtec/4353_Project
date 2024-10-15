@@ -29,12 +29,12 @@ export default function App() {
   const [isAdmin, setIsAdmin] = useState(false);
 
   // Function to fetch user role
-  const fetchUserRole = async (userId) => {
+  const fetchUserRole = async (email) => {
     try {
       const { data, error } = await supabase
         .from("accounts")
         .select("role")
-        .eq("email_address") // Use email_address to find the user
+        .eq("email_address", email) // Use email_address to find the user
         .single();
 
       if (error) {
@@ -55,7 +55,7 @@ export default function App() {
       setSession(session);
       setLoading(false); // Mark as done loading
       if (session) {
-        fetchUserRole(session.user.id); // Fetch user role
+        fetchUserRole(session.user.email); // Fetch user role
       }
     });
 
@@ -64,7 +64,7 @@ export default function App() {
       (_event, session) => {
         setSession(session);
         if (session) {
-          fetchUserRole(session.user.id);
+          fetchUserRole(session.user.email);
         } else {
           setIsAdmin(false); // Reset admin status when not logged in
         }
@@ -125,14 +125,18 @@ export default function App() {
         {/* <Route
           path="/admin"
           element={
-            session && isAdmin ? (
-              <AdminDashboard supabase={supabase} />
+            session ? (
+              isAdmin ? (
+                <AdminDashboard supabase={supabase} />
+              ) : (
+                <Navigate to="/volunteer" />
+              )
             ) : (
               <Navigate to="/login" />
             )
           }
         /> */}
-        
+
         <Route
           path="/admin"
           element={<AdminDashboard supabase={supabase} />}
