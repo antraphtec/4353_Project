@@ -15,7 +15,6 @@ function Registration() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [role, setRole] = useState("volunteer");
 
   const navigate = useNavigate();
 
@@ -58,7 +57,7 @@ function Registration() {
             fullName: name,
             email_address: email,
             phone,
-            role,
+            role: "volunteer", // Default to volunteer role
           },
         ]);
 
@@ -77,7 +76,6 @@ function Registration() {
       alert("Something went wrong, please try again later.");
     }
   };
-
 
   return (
     <div className="registration-form-container">
@@ -151,17 +149,6 @@ function Registration() {
             />
             <label htmlFor="showPassword">Show password</label>
           </div>
-
-          <label htmlFor="role">Role</label>
-          <select
-            id="role"
-            name="role"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-          >
-            <option value="volunteer">Volunteer</option>
-            <option value="admin">Admin</option>
-          </select>
 
           <button type="submit">Register Now</button>
         </form>

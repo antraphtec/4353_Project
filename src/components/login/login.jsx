@@ -6,7 +6,6 @@ const Login = ({ supabase }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [adminId, setAdminId] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -14,34 +13,21 @@ const Login = ({ supabase }) => {
     event.preventDefault();
 
     try {
-      let response;
-
-      if (isAdmin) {
-        // Assuming admins use a unique email format for login
-        response = await supabase.auth.signInWithPassword({
-          email: `${adminId}@yourdomain.com`,
-          password,
-        });
-      } else {
-        // Volunteer login
-        response = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-      }
+      // Attempt login with Supabase
+      const response = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
       if (response.error) {
         throw response.error;
       }
 
-      // On successful login, check user role
-      //const userId = response.data.user.id;
-
       // Fetch the role from the "accounts" table
       const { data, error } = await supabase
         .from("accounts")
         .select("role")
-        .eq("email_address") // Use email_address to find the user
+        .eq("email_address", email) // Use email_address to find the user
         .single();
 
       if (error) {
@@ -49,13 +35,20 @@ const Login = ({ supabase }) => {
         throw error;
       }
 
-      // Navigate based on user role
-      if (data.role === "admin") {
-        navigate("/admin");
+      // Navigate based on user role and selected login type (admin/volunteer)
+      if (isAdmin) {
+        if (data.role === "admin") {
+          navigate("/admin");
+        } else {
+          alert("You do not have admin privileges.");
+        }
       } else {
-        navigate("/profile");
+        if (data.role === "volunteer") {
+          navigate("/volunteer");
+        } else {
+          alert("This account is not registered as a volunteer.");
+        }
       }
-
     } catch (error) {
       alert("Login failed: " + error.message);
     }
@@ -82,27 +75,13 @@ const Login = ({ supabase }) => {
           </button>
         </div>
 
-        {isAdmin ? (
-          <>
-            <label>Admin ID:</label>
-            <input
-              type="text"
-              value={adminId}
-              onChange={(e) => setAdminId(e.target.value)}
-              required
-            />
-          </>
-        ) : (
-          <>
-            <label>Email:</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </>
-        )}
+        <label>Email:</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
         <label>Password:</label>
         <input

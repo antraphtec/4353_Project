@@ -15,6 +15,7 @@ import VolunteerMatching from "./components/matching/matching.jsx";
 import Registration from "./components/registration/registration.js";
 import EventManagement from "./components/eventManagement/EventManagement.js";
 import AdminDashboard from "./components/admin/AdminDashboard.jsx";
+import VolunteerDashboard from "./components/volunteer/volunteerDashboard.jsx";
 import { createClient } from "@supabase/supabase-js";
 
 // Initialize Supabase client
@@ -101,7 +102,6 @@ export default function App() {
           }
         />
 
-{/*
         <Route
           path="/eventmanagement"
           element={
@@ -112,33 +112,20 @@ export default function App() {
             )
           }
         />
-*/}
 
-<Route
-  path="/eventmanagement"
-  element={<EventManagement supabase={supabase} />}
-/>
-{/*
         <Route
           path="/volunteer"
           element={
             session ? (
-              <VolunteerMatching supabase={supabase} />
+              <VolunteerDashboard supabase={supabase} />
             ) : (
               <Navigate to="/login" />
             )
           }
         />
-*/}
-
-<Route
-  path="/volunteer"
-  element={<VolunteerMatching supabase={supabase} />}
-/>
 
         {/* Admin Route */}
-  
-        {/* <Route
+        <Route
           path="/admin"
           element={
             session ? (
@@ -151,12 +138,7 @@ export default function App() {
               <Navigate to="/login" />
             )
           }
-        /> */}
-
-      <Route
-        path="/admin"
-        element={<AdminDashboard supabase={supabase} />}
-      />
+        />
 
         {/* Authentication Routes */}
         <Route

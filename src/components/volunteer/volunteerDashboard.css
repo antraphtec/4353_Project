@@ -1,0 +1,79 @@
+/* VolunteerDashboard.css */
+
+/* General Dashboard Layout */
+.volunteer-dashboard {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* Drawer (Sidebar) Styling */
+  .drawer {
+    width: 240px;
+    height: 100vh;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-top: 20px;
+    overflow: auto;
+    z-index: 1000;
+  }
+  
+  .drawer-header {
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .drawer-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .drawer-list-item {
+    padding: 15px;
+    color: #444;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .drawer-list-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* Main Content Styling */
+  .main-content {
+    margin-left: 260px; /* Leave space for sidebar */
+    flex-grow: 1;
+    padding: 40px; /* Ensure enough space around the content */
+    transition: margin-left 0.3s ease;
+  }
+  
+  /* Table Styling */
+  .dashboard-content {
+    display: grid;
+    grid-template-columns: 1fr; /* Adjust columns to fill available space */
+    gap: 20px;
+  }
+  
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+    .drawer {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+  
+    .main-content {
+      margin-left: 0;
+      padding: 20px;
+    }
+  
+    .dashboard-content {
+      grid-template-columns: 1fr;
+    }
+  }
+  
