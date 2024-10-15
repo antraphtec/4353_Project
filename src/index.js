@@ -34,7 +34,7 @@ export default function App() {
       const { data, error } = await supabase
         .from("accounts")
         .select("role")
-        .eq("email_address") // Use email_address to find the user
+        .eq("email_address")
         .single();
 
       if (error) {
@@ -100,6 +100,8 @@ export default function App() {
             )
           }
         />
+
+{/*
         <Route
           path="/eventmanagement"
           element={
@@ -110,6 +112,8 @@ export default function App() {
             )
           }
         />
+*/}
+
         <Route
           path="/volunteer"
           element={
@@ -122,7 +126,7 @@ export default function App() {
         />
 
         {/* Admin Route */}
-        {/* <Route
+        <Route
           path="/admin"
           element={
             session && isAdmin ? (
@@ -131,11 +135,6 @@ export default function App() {
               <Navigate to="/login" />
             )
           }
-        /> */}
-        
-        <Route
-          path="/admin"
-          element={<AdminDashboard supabase={supabase} />}
         />
 
 
