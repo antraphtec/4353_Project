@@ -27,7 +27,7 @@ const supabase = createClient(
 export default function App() {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(null); // Updated to null to track initial state
 
   // Function to fetch user role
   const fetchUserRole = async (email) => {
@@ -40,6 +40,7 @@ export default function App() {
 
       if (error) {
         console.error("Error fetching user role:", error);
+        setIsAdmin(false);
       } else if (data && data.role === "admin") {
         setIsAdmin(true);
       } else {
@@ -47,6 +48,7 @@ export default function App() {
       }
     } catch (error) {
       console.error("Unexpected error fetching user role:", error);
+      setIsAdmin(false);
     }
   };
 
@@ -54,10 +56,10 @@ export default function App() {
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
-      setLoading(false); // Mark as done loading
       if (session) {
         fetchUserRole(session.user.email); // Fetch user role
       }
+      setLoading(false); // Mark as done loading only after trying to fetch user role
     });
 
     // Listen for auth changes
@@ -128,14 +130,14 @@ export default function App() {
         <Route
           path="/admin"
           element={
-            session ? (
+            session && isAdmin !== null ? (
               isAdmin ? (
                 <AdminDashboard supabase={supabase} />
               ) : (
-                <Navigate to="/" /> // Redirect to home if user is not an admin
+                <Navigate to="/" />
               )
             ) : (
-              <Navigate to="/login" />
+              <div>Loading...</div> // Loading while we check if the user is an admin
             )
           }
         />
