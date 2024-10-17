@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./EventManagement.css";
 import { createClient } from "@supabase/supabase-js";
+import skillsList from '../skillsList';
+
 
 
 // Initialize Supabase client
@@ -129,7 +131,7 @@ function EventManagement() {
           </select>
 
           <label htmlFor="skills">Required Skills</label>
-          <div className="checkbox-group">
+          {/* <div className="checkbox-group">
             {["leadership", "communication", "time-management", "problem-solving", "construction", "organization", "teamwork"].map((skill) => (
               <label key={skill}>
                 <input
@@ -139,6 +141,20 @@ function EventManagement() {
                   onChange={handleSkillsChange}
                 />
                 {skill.charAt(0).toUpperCase() + skill.slice(1)}
+              </label>
+            ))}
+          </div> */}
+
+          <div className="checkbox-group">
+            {skillsList.map(({ id, name }) => (
+              <label key={id}>
+                <input
+                  type="checkbox"
+                  value={id}
+                  checked={skills.includes(id)}
+                  onChange={handleSkillsChange}
+                />
+                {name}
               </label>
             ))}
           </div>

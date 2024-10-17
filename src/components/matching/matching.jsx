@@ -133,10 +133,40 @@ const VolunteerMatchingForm = ({ supabase }) => {
 
   // Handle event selection change
   const handleEventChange = (event) => {
-    const selectedEventId = event.target.value;
+    const selectedEventId = event.target.value; // Get the selected event value
+    console.log("Selected Event ID:", selectedEventId); // Log the selected event ID
     setSelectedEvent(selectedEventId);
     setMatchedVolunteers([]); // Clear previously matched volunteers
   };
+  
+
+  // Handle volunteer matching
+  // const handleMatchVolunteers = async () => {
+  //   if (!selectedEvent) {
+  //     alert('Please select an event.');
+  //     return;
+  //   }
+
+  //   try {
+  //     // Insert matches into the event_volunteer_matches table
+  //     const { data, error } = await supabase
+  //       .from('event_volunteer_matches')
+  //       .insert(
+  //         volunteers.map((volunteer) => ({
+  //           event_id: selectedEvent,
+  //           volunteer_id: volunteer.id,
+  //         }))
+  //       );
+
+  //     if (error) throw error;
+
+  //     setMatchedVolunteers(volunteers);
+  //     alert('Volunteers successfully matched to the event.');
+  //   } catch (error) {
+  //     console.error('Error matching volunteers:', error.message);
+  //   }
+  // };
+
 
   // Handle volunteer matching
   const handleMatchVolunteers = async () => {
@@ -146,24 +176,46 @@ const VolunteerMatchingForm = ({ supabase }) => {
     }
 
     try {
-      // Insert matches into the event_volunteer_matches table
-      const { data, error } = await supabase
+      // Fetch the selected event's skills
+      const { data: selectedEventData, error: eventError } = await supabase
+        .from('events')
+        .select('skills')
+        .eq('id', selectedEvent)
+        .single();
+
+      if (eventError) throw eventError;
+
+      const eventSkills = selectedEventData.skills; // Array of skills for the selected event
+
+      // Filter volunteers that have at least one skill matching the event skills
+      const matched = volunteers.filter((volunteer) =>
+        volunteer.skills.some((skill) => eventSkills.includes(skill))
+      );
+
+      if (matched.length === 0) {
+        alert('No volunteers matched the event skills.');
+      } else {
+        setMatchedVolunteers(matched);
+        alert('Volunteers successfully matched to the event.');
+      }
+
+      // Optionally, insert the matched volunteers into the `event_volunteer_matches` table
+      const { error: matchError } = await supabase
         .from('event_volunteer_matches')
         .insert(
-          volunteers.map((volunteer) => ({
+          matched.map((volunteer) => ({
             event_id: selectedEvent,
             volunteer_id: volunteer.id,
           }))
         );
 
-      if (error) throw error;
+      if (matchError) throw matchError;
 
-      setMatchedVolunteers(volunteers);
-      alert('Volunteers successfully matched to the event.');
     } catch (error) {
       console.error('Error matching volunteers:', error.message);
     }
   };
+  
 
   return (
     <div className="volunteer-matching-container">
@@ -186,6 +238,7 @@ const VolunteerMatchingForm = ({ supabase }) => {
             ))}
           </Select>
         </FormControl>
+
 
         {/* Volunteers List */}
         <Typography variant="h6">Volunteers:</Typography>

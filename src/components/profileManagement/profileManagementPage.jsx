@@ -10,6 +10,8 @@ import {
   FormHelperText,
 } from '@mui/material';
 import './profileManagement.css';
+import skillsList from '../skillsList';
+
 
 const states = [
   { code: 'TX', name: 'Texas' },
@@ -17,12 +19,15 @@ const states = [
   // Add more states as needed
 ];
 
-const skillsList = [
-  { id: '1', name: 'Teamwork' },
-  { id: '2', name: 'Organization' },
-  { id: '3', name: 'Tech Skills' }
-  // Add more skills as needed
-];
+// const skillsList = [
+//   { id: 'leadership', name: 'Leadership' },
+//   { id: 'communication', name: 'Communication' },
+//   { id: 'time-management', name: 'Time Management' },
+//   { id: 'problem-solving', name: 'Problem Solving' },
+//   { id: 'construction', name: 'Construction' },
+//   { id: 'organization', name: 'Organization' },
+//   { id: 'teamwork', name: 'Teamwork' }
+// ];
 
 const ProfileManagement = ({ supabase, profileEmail = null, isAdmin = false }) => {
   const [session, setSession] = useState(null);
@@ -235,7 +240,7 @@ const ProfileManagement = ({ supabase, profileEmail = null, isAdmin = false }) =
           />
 
           {/* Skills */}
-          <Controller
+          {/* <Controller
             name="skills"
             control={control}
             rules={{ required: 'Select at least one skill' }}
@@ -259,7 +264,34 @@ const ProfileManagement = ({ supabase, profileEmail = null, isAdmin = false }) =
                 )}
               </FormControl>
             )}
+          /> */}
+
+          <Controller
+            name="skills"
+            control={control}
+            rules={{ required: 'Select at least one skill' }}
+            render={({ field }) => (
+              <FormControl fullWidth margin="normal" error={!!errors.skills}>
+                <InputLabel>Skills</InputLabel>
+                <Select
+                  {...field}
+                  multiple
+                  value={field.value || []}
+                  onChange={(event) => field.onChange(event.target.value)}
+                >
+                  {skillsList.map(({ id, name }) => (
+                    <MenuItem key={id} value={id}>
+                      {name}
+                    </MenuItem>
+                  ))}
+                </Select>
+                {errors.skills && (
+                  <FormHelperText>{errors.skills.message}</FormHelperText>
+                )}
+              </FormControl>
+            )}
           />
+
 
           {/* Availability */}
           <Controller
