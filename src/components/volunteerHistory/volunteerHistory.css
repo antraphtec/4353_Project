@@ -1,0 +1,49 @@
+/* VolunteerHistory.css */
+
+.volunteer-history-table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.volunteer-history-table th {
+    background-color: #f0f0f0;  
+    font-weight: bold;
+    padding: 12px;               
+    text-align: left;
+    border-bottom: 2px solid #ddd;  
+}
+
+.volunteer-history-table td {
+    padding: 12px;               
+    text-align: left;
+    border-bottom: 1px solid #eee; 
+    color: #333;                
+}
+
+.volunteer-history-table tr:hover {
+    background-color: #fafafa;   
+}
+
+.volunteer-history-table {
+    width: 100%;
+    margin-bottom: 40px;         
+}
+
+.volunteer-history-table h6 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .volunteer-history-table th,
+    .volunteer-history-table td {
+        padding: 10px;
+    }
+    
+    .volunteer-history-table h6 {
+        font-size: 20px;
+    }
+}

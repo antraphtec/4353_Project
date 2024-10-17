@@ -1,4 +1,3 @@
-// VolunteerHistory.jsx
 import React, { useState, useEffect } from "react";
 import {
   Table,
@@ -11,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { format } from "date-fns";
+import './VolunteerHistory.css'; // Importing the CSS for styling
 
 const VolunteerHistory = ({ supabase }) => {
   const [volunteerHistory, setVolunteerHistory] = useState([]);
@@ -21,9 +21,8 @@ const VolunteerHistory = ({ supabase }) => {
       try {
         // Fetching event data along with volunteer participation status
         const { data, error } = await supabase
-          .from("volunteer_participation") // Assume this is the participation table
+          .from("volunteer_participation") // Assuming this is the table that tracks participation
           .select(`
-            event_id,
             participation_status,
             events (
               name,
@@ -34,7 +33,7 @@ const VolunteerHistory = ({ supabase }) => {
               date
             )
           `);
-        
+
         if (error) {
           console.error("Error fetching volunteer history:", error);
         } else {
@@ -72,8 +71,8 @@ const VolunteerHistory = ({ supabase }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {volunteerHistory.map((history) => (
-            <TableRow key={history.event_id}>
+          {volunteerHistory.map((history, index) => (
+            <TableRow key={index}>
               <TableCell>{history.events.name}</TableCell>
               <TableCell>{history.events.description}</TableCell>
               <TableCell>{history.events.location}</TableCell>
