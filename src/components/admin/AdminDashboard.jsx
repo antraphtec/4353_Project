@@ -19,6 +19,7 @@ import {
 import ProfileManagement from '../profileManagement/profileManagementPage';
 import VolunteerMatching from '../matching/matching';
 import EventManagement from '../eventManagement/EventManagement';
+import VolunteerHistory from './volunteerHistory'; // Import VolunteerHistory component
 import './AdminDashboard.css';
 import { format } from 'date-fns';
 
@@ -188,9 +189,7 @@ const AdminDashboard = ({ supabase }) => {
             </div>
           )}
           {selectedView === 'volunteerHistory' && (
-            <div>
-              <Typography variant="h6">Volunteer Participation History</Typography>
-            </div>
+            <VolunteerHistory supabase={supabase} />
           )}
         </Box>
       </Box>

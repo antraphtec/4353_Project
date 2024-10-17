@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { format } from "date-fns";
-import './VolunteerHistory.css'; // Importing the CSS for styling
+import './volunteerHistory.css'; // Importing the CSS for styling
 
 const VolunteerHistory = ({ supabase }) => {
   const [volunteerHistory, setVolunteerHistory] = useState([]);

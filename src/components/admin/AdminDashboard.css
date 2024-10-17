@@ -64,23 +64,3 @@
     grid-template-columns: 1fr;
   }
 }
-
-.volunteer-history-table {
-  margin-top: 20px;
-  width: 100%;
-}
-
-.volunteer-history-table th {
-  background-color: #f0f0f0;
-  font-weight: bold;
-}
-
-.volunteer-history-table td {
-  padding: 10px;
-  text-align: left;
-}
-
-.volunteer-history-table .MuiTableCell-root {
-  padding: 16px;
-}
-
