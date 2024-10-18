@@ -28,7 +28,7 @@ body {
     border-radius: 10px;
     overflow: hidden;
     flex-direction: column; /* Change to column layout */
-    padding: 40px;
+    padding: 50px;
 }
 
 /* Form section for event details */

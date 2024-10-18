@@ -103,7 +103,7 @@ function EventManagement() {
       <div className="form-side">
         <h2>Manage Events</h2>
         <p className="subheading">
-          As administrator, you can create and edit existing events here.
+          As administrator, you can create and publish events here.
         </p>
         <p className="form-title">Please Fill Out The Form</p>
         <form id="event-form" onSubmit={handleSubmit}>
@@ -157,20 +157,6 @@ function EventManagement() {
           </select>
 
           <label htmlFor="skills">Required Skills</label>
-          {/* <div className="checkbox-group">
-            {["leadership", "communication", "time-management", "problem-solving", "construction", "organization", "teamwork"].map((skill) => (
-              <label key={skill}>
-                <input
-                  type="checkbox"
-                  value={skill}
-                  checked={skills.includes(skill)}
-                  onChange={handleSkillsChange}
-                />
-                {skill.charAt(0).toUpperCase() + skill.slice(1)}
-              </label>
-            ))}
-          </div> */}
-
           <div className="checkbox-group">
             {skillsList.map(({ id, name }) => (
               <label key={id}>
