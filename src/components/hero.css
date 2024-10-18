@@ -22,7 +22,7 @@
 .hero-image11 {
   position: absolute;
   width: 100%; 
-  height: auto; 
+  height: 100%; 
   left: 0; 
   top: 50%; 
   transform: translateY(-50%);
@@ -39,7 +39,7 @@
 
 .hero-youngboysandyounggirljumping {
   max-width: 50%; 
-  height: 80%;
+  height: 70%;
   position: relative;
   left: 0;
   margin-right: 30px; 

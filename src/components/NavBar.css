@@ -1,15 +1,27 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 50px;
+  padding: 20px 50px;
   background-color: #487a52;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-bottom: 2px solid #ddd;
-  position: relative;
-  width: 100vw; 
-  margin: 0px; 
-  box-sizing: border-box; 
+  position: fixed; 
+  top: 0; 
+  width: 100vw;
+  margin: 0; 
+  z-index: 1000; 
+  box-sizing: border-box;
+}
+
+body {
+  padding-top: 120px;
 }
 
 .logo {
@@ -37,7 +49,7 @@
 }
 
 .nav-links li {
-  margin-left: 20px; 
+  margin-left: 20px;
 }
 
 .nav-links a {
@@ -63,28 +75,28 @@
   display: block;
   width: 0;
   height: 2px;
-  background-color: #475443; 
+  background-color: #475443;
   transition: width 0.3s;
 }
 
 .nav-link:hover::after {
-  width: 100%; 
+  width: 100%;
 }
 
 .sign-in-btn, .sign-up-btn, .sign-out-btn {
-  display: inline-flex; 
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 20px; 
-  font-size: 14px; 
+  padding: 10px 20px;
+  font-size: 14px;
   border: 2px solid transparent;
   border-radius: 5px;
   text-decoration: none;
-  font-weight: 600; 
-  line-height: 1; 
+  font-weight: 600;
+  line-height: 1;
   background-color: #475443;
   color: white;
-  border-color: #475443; 
+  border-color: #475443;
 }
 
 .sign-in-btn:hover, .sign-up-btn:hover, .sign-out-btn:hover {
@@ -100,6 +112,6 @@
   .nav-links {
     flex-direction: column;
     margin-top: 10px;
-    width: 100%; 
+    width: 100%;
   }
 }
