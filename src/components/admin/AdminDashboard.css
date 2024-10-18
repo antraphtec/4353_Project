@@ -1,5 +1,4 @@
-/* Navbar Styles (ensure it's placed above everything) */
-
+/* Navbar Styles */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -19,21 +18,23 @@
 
 /* Sidebar Styles */
 .admin-sidebar {
-  position: fixed; /* Fix sidebar to the left */
-  top: 70px; /* Adjust based on navbar height */
+  position: fixed;
+  top: 70px;
   left: 0;
-  width: 250px;
-  height: 100vh;
+  width: 240px;
+  height: calc(100vh - 70px);
   background-color: #f4f4f4;
   padding-top: 20px;
   box-sizing: border-box;
-  z-index: 999; /* Below navbar but above content */
+  z-index: 999;
+  overflow-y: auto;
 }
 
 /* Sidebar Links */
 .admin-sidebar ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 .admin-sidebar li {
@@ -48,78 +49,56 @@
 
 /* Main Dashboard Content */
 .admin-dashboard {
-  margin-left: 250px; /* Offset for the sidebar */
-  margin-top: 70px;  /* Offset for the navbar */
+  display: flex;
+  margin-left: 240px;
   padding: 20px;
   background-color: #f9f9f9;
   min-height: 100vh;
   box-sizing: border-box;
+  width: calc(100% - 240px);
+  margin-top: 70px;
 }
 
-/* Dashboard Header */
-.dashboard-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-}
-
-.dashboard-header h1 {
-  font-size: 2rem;
-  color: #333;
-}
-
-/* Dashboard Content - Cards Layout */
+/* Ensure Full Width of the Selected View */
 .dashboard-content {
+  width: 100%; /* Full width of the dashboard */
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: 1fr; /* One full-width column */
   gap: 20px;
 }
 
-/* Individual Card Styling */
-.card {
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  text-align: center;
+/* Box content alignment fix */
+.box-content {
+  width: 100%; /* Ensure the content takes the full width */
+  padding-top: 20px;
+  box-sizing: border-box;
 }
 
-.card-title {
-  font-size: 1.5rem;
-  color: #444;
-  margin-bottom: 10px;
-}
-
-.card-content {
-  font-size: 1rem;
-  color: #666;
-}
-
-.card-button {
-  background-color: #007BFF;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.card-button:hover {
-  background-color: #0056b3;
+/* Drawer content adjustment */
+.drawer-content {
+  flex-grow: 1;
 }
 
 /* Responsive Layout */
 @media (max-width: 768px) {
   .admin-dashboard {
-    margin-left: 0; /* Remove margin for mobile */
-    margin-top: 70px; /* Still keep space for navbar */
+    margin-left: 0;
+    margin-top: 70px;
+    width: 100%;
   }
 
   .dashboard-content {
     grid-template-columns: 1fr;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 0;
+  }
+
+  .box-content {
+    margin-left: 0;
   }
 }

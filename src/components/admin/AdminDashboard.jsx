@@ -19,7 +19,7 @@ import {
 import ProfileManagement from '../profileManagement/profileManagementPage';
 import VolunteerMatching from '../matching/matching';
 import EventManagement from '../eventManagement/EventManagement';
-import VolunteerHistory from './volunteerHistory'; // Import VolunteerHistory component
+import VolunteerHistory from './volunteerHistory'; 
 import './AdminDashboard.css';
 import { format } from 'date-fns';
 
@@ -52,7 +52,6 @@ const AdminDashboard = ({ supabase }) => {
     checkAdminStatus();
   }, [supabase]);
 
-  // Fetch events on load
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -86,13 +85,14 @@ const AdminDashboard = ({ supabase }) => {
   return (
     <div className="admin-dashboard">
       <Box sx={{ display: 'flex' }}>
+        {/* Sidebar */}
         <Drawer
           variant="permanent"
           anchor="left"
           sx={{
-            width: 240,
+            width: 240, // Fixed width for the sidebar
             flexShrink: 0,
-            [`& .MuiDrawer-paper`]: { width: 240, boxSizing: 'border-box' },
+            [`& .MuiDrawer-paper`]: { width: 240, boxSizing: 'border-box' }, // Ensure the drawer is 240px wide
           }}
         >
           <List>
@@ -121,11 +121,14 @@ const AdminDashboard = ({ supabase }) => {
           </List>
         </Drawer>
 
+        {/* Main Content */}
         <Box
           sx={{
             flexGrow: 1,
             p: 3,
-            marginLeft: '240px',
+            marginLeft: '0px',  // Make sure content aligns to the right of the sidebar
+            width: '1100px',  // Use the remaining width (full screen minus sidebar width)
+            boxSizing: 'border-box',  // Proper box-sizing for padding
           }}
         >
           <Typography variant="h4" style={{ marginBottom: '20px' }}>
@@ -137,6 +140,7 @@ const AdminDashboard = ({ supabase }) => {
             {selectedView === 'volunteerHistory' && 'Volunteer History'}
           </Typography>
 
+          {/* Conditionally render content based on selectedView */}
           {selectedView === 'profileManagement' && (
             <ProfileManagement supabase={supabase} />
           )}
@@ -168,9 +172,15 @@ const AdminDashboard = ({ supabase }) => {
                         <TableCell>{event.name}</TableCell>
                         <TableCell>{event.description}</TableCell>
                         <TableCell>{event.location}</TableCell>
-                        <TableCell>{event.date ? format(new Date(event.date), 'MMMM d, yyyy h:mm a') : 'No Date Available'}</TableCell>
                         <TableCell>
-                          {event.skills && event.skills.length > 0 ? event.skills.join(', ') : 'No Skills Available'}
+                          {event.date
+                            ? format(new Date(event.date), 'MMMM d, yyyy h:mm a')
+                            : 'No Date Available'}
+                        </TableCell>
+                        <TableCell>
+                          {event.skills && event.skills.length > 0
+                            ? event.skills.join(', ')
+                            : 'No Skills Available'}
                         </TableCell>
                         <TableCell>{event.urgency}</TableCell>
                       </TableRow>
