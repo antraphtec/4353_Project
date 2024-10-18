@@ -1,111 +1,33 @@
-// import React, { useState, useEffect } from 'react';
-// import { Select, MenuItem, InputLabel, FormControl, Typography } from '@mui/material';
-// import './matchingform.css'; 
-
-// const VolunteerMatchingForm = ({ supabase }) => {
-//   // Mock data for events and skills (replace with actual API/database calls in the future)
-//   const mockEvents = [
-//     { id: 'event1', name: 'Beach Cleanup' },
-//     { id: 'event2', name: 'Tree Planting' },
-//     { id: 'event3', name: 'Food Drive' },
-//   ];
-
-//   const mockSkillsByEvent = {
-//     event1: ['Environmental Awareness', 'Teamwork'],
-//     event2: ['Gardening', 'Physical Fitness'],
-//     event3: ['Organizational Skills', 'Communication'],
-//   };
-
-//   const mockVolunteers = [
-//     'Example Volunteer 1', 'Example Volunteer 2', 'Example Volunteer 3', 'Example Volunteer 4', 'Example Volunteer 5',
-//     'Example Volunteer 6', 'Example Volunteer 7', 'Example Volunteer 8', 'Example Volunteer 9', 'Example Volunteer 10',
-//   ];
-
-//   // State to handle selected event and skills
-//   const [selectedEvent, setSelectedEvent] = useState('');
-//   const [requiredSkills, setRequiredSkills] = useState([]);
-
-//   // Handle event change
-//   const handleEventChange = (event) => {
-//     const selectedEventId = event.target.value;
-//     setSelectedEvent(selectedEventId);
-//     // Simulate fetching skills based on selected event
-//     setRequiredSkills(mockSkillsByEvent[selectedEventId] || []);
-//   };
-
-//   return (
-//     <div className="volunteer-matching-container">
-//       <div className="background-image">
-//         {/* Placeholder for background image */}
-//         <img src="/images/matchingimg.jpg" alt="Background" />
-//       </div>
-      
-//       <div className="form-container">
-//         <Typography variant="h4">Volunteer Matching Form</Typography>
-//         <Typography variant="subtitle1">As administrator, you can match volunteers to events</Typography>
-
-//         {/* Dropdown for Volunteer Events */}
-//         <FormControl fullWidth margin="normal">
-//           <InputLabel>Volunteer Events</InputLabel>
-//           <Select value={selectedEvent} onChange={handleEventChange}>
-//             {mockEvents.map((event) => (
-//               <MenuItem key={event.id} value={event.id}>
-//                 {event.name}
-//               </MenuItem>
-//             ))}
-//           </Select>
-//         </FormControl>
-
-//         {/* Skills Display */}
-//         <Typography variant="h6">Skills:</Typography>
-//         {requiredSkills.length > 0 ? (
-//           <ul>
-//             {requiredSkills.map((skill, index) => (
-//               <li key={index}>{skill}</li>
-//             ))}
-//           </ul>
-//         ) : (
-//           <Typography variant="body2">** generated from database based on admin input **</Typography>
-//         )}
-
-//         {/* Volunteers List */}
-//         <hr />
-//         <Typography variant="h6">Volunteers:</Typography>
-//         <ul>
-//           {mockVolunteers.map((volunteer, index) => (
-//             <li key={index}>{volunteer}</li>
-//           ))}
-//         </ul>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default VolunteerMatchingForm;
-
-import React, { useState, useEffect } from 'react';
-import { Select, MenuItem, InputLabel, FormControl, Typography, Button } from '@mui/material';
-import './matchingform.css';
+import React, { useState, useEffect } from "react";
+import {
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Typography,
+  Button,
+} from "@mui/material";
+import "./matchingform.css";
 
 const VolunteerMatchingForm = ({ supabase }) => {
   const [events, setEvents] = useState([]);
   const [volunteers, setVolunteers] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState('');
+  const [selectedEvent, setSelectedEvent] = useState("");
   const [matchedVolunteers, setMatchedVolunteers] = useState([]);
 
   // Fetch events from Supabase
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        let { data, error } = await supabase
-          .from('events')
-          .select('*');
+        console.log("Fetching events..."); // Add debug statement here
+        const { data, error } = await supabase.from("events").select("*");
 
         if (error) throw error;
 
+        console.log("Fetched events:", data); // Debug statement to see fetched data
         setEvents(data);
       } catch (error) {
-        console.error('Error fetching events:', error.message);
+        console.error("Error fetching events:", error.message);
       }
     };
 
@@ -116,15 +38,14 @@ const VolunteerMatchingForm = ({ supabase }) => {
   useEffect(() => {
     const fetchVolunteers = async () => {
       try {
-        let { data, error } = await supabase
-          .from('volunteers')
-          .select('*');
+        const { data, error } = await supabase.from("volunteers").select("*");
 
         if (error) throw error;
 
+        console.log("Fetched volunteers:", data); // Debug statement
         setVolunteers(data);
       } catch (error) {
-        console.error('Error fetching volunteers:', error.message);
+        console.error("Error fetching volunteers:", error.message);
       }
     };
 
@@ -133,75 +54,50 @@ const VolunteerMatchingForm = ({ supabase }) => {
 
   // Handle event selection change
   const handleEventChange = (event) => {
-    const selectedEventId = event.target.value; // Get the selected event value
-    console.log("Selected Event ID:", selectedEventId); // Log the selected event ID
+    const selectedEventId = event.target.value;
+
+    console.log("Event selection triggered:", selectedEventId); // Debugging
+
     setSelectedEvent(selectedEventId);
-    setMatchedVolunteers([]); // Clear previously matched volunteers
+    setMatchedVolunteers([]); // Clear previous matches when new event is selected
   };
-  
-
-  // Handle volunteer matching
-  // const handleMatchVolunteers = async () => {
-  //   if (!selectedEvent) {
-  //     alert('Please select an event.');
-  //     return;
-  //   }
-
-  //   try {
-  //     // Insert matches into the event_volunteer_matches table
-  //     const { data, error } = await supabase
-  //       .from('event_volunteer_matches')
-  //       .insert(
-  //         volunteers.map((volunteer) => ({
-  //           event_id: selectedEvent,
-  //           volunteer_id: volunteer.id,
-  //         }))
-  //       );
-
-  //     if (error) throw error;
-
-  //     setMatchedVolunteers(volunteers);
-  //     alert('Volunteers successfully matched to the event.');
-  //   } catch (error) {
-  //     console.error('Error matching volunteers:', error.message);
-  //   }
-  // };
-
 
   // Handle volunteer matching
   const handleMatchVolunteers = async () => {
+    console.log("Selected event before matching:", selectedEvent); // Debug log for selected event
+
     if (!selectedEvent) {
-      alert('Please select an event.');
+      alert("Please select an event.");
       return;
     }
 
     try {
       // Fetch the selected event's skills
       const { data: selectedEventData, error: eventError } = await supabase
-        .from('events')
-        .select('skills')
-        .eq('id', selectedEvent)
+        .from("events")
+        .select("skills")
+        .eq("id", selectedEvent)
         .single();
 
       if (eventError) throw eventError;
 
-      const eventSkills = selectedEventData.skills; // Array of skills for the selected event
+      const eventSkills = selectedEventData.skills;
 
-      // Filter volunteers that have at least one skill matching the event skills
+      // Match volunteers based on skills
       const matched = volunteers.filter((volunteer) =>
         volunteer.skills.some((skill) => eventSkills.includes(skill))
       );
 
       if (matched.length === 0) {
-        alert('No volunteers matched the event skills.');
+        alert("No volunteers matched the event skills.");
       } else {
         setMatchedVolunteers(matched);
-        alert('Volunteers successfully matched to the event.');
+        alert("Volunteers successfully matched to the event.");
       }
 
-      // Optionally, insert the matched volunteers into the `event_volunteer_matches` table
+      // Insert matched volunteers into the event_volunteer_matches table
       const { error: matchError } = await supabase
-        .from('event_volunteer_matches')
+        .from("event_volunteer_matches")
         .insert(
           matched.map((volunteer) => ({
             event_id: selectedEvent,
@@ -210,12 +106,10 @@ const VolunteerMatchingForm = ({ supabase }) => {
         );
 
       if (matchError) throw matchError;
-
     } catch (error) {
-      console.error('Error matching volunteers:', error.message);
+      console.error("Error matching volunteers:", error.message);
     }
   };
-  
 
   return (
     <div className="volunteer-matching-container">
@@ -225,20 +119,28 @@ const VolunteerMatchingForm = ({ supabase }) => {
 
       <div className="form-container">
         <Typography variant="h4">Volunteer Matching Form</Typography>
-        <Typography variant="subtitle1">As administrator, you can match volunteers to events</Typography>
+        <Typography variant="subtitle1">
+          As administrator, you can match volunteers to events
+        </Typography>
 
         {/* Dropdown for Volunteer Events */}
         <FormControl fullWidth margin="normal">
           <InputLabel>Volunteer Events</InputLabel>
-          <Select value={selectedEvent} onChange={handleEventChange}>
-            {events.map((event) => (
-              <MenuItem key={event.id} value={event.id}>
-                {event.name}
-              </MenuItem>
-            ))}
-          </Select>
+          {events.length > 0 ? (
+            <Select
+              value={selectedEvent}
+              onChange={handleEventChange} // Correctly bind onChange
+            >
+              {events.map((event) => (
+                <MenuItem key={event.id} value={event.id}>
+                  {event.name}
+                </MenuItem>
+              ))}
+            </Select>
+          ) : (
+            <Typography>No events available</Typography>
+          )}
         </FormControl>
-
 
         {/* Volunteers List */}
         <Typography variant="h6">Volunteers:</Typography>
@@ -249,7 +151,11 @@ const VolunteerMatchingForm = ({ supabase }) => {
         </ul>
 
         {/* Match Volunteers Button */}
-        <Button variant="contained" color="primary" onClick={handleMatchVolunteers}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleMatchVolunteers}
+        >
           Match Volunteers to Event
         </Button>
 

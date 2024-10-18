@@ -13,7 +13,6 @@ import HERO from "./components/hero.js";
 import Footer from "./components/footer.jsx";
 import Login from "./components/login/login.jsx";
 import ProfileManagement from "./components/profileManagement/profileManagementPage.jsx";
-import VolunteerMatching from "./components/matching/matching.jsx";
 import Registration from "./components/registration/registration.js";
 import EventManagement from "./components/eventManagement/EventManagement.js";
 import AdminDashboard from "./components/admin/AdminDashboard.jsx";
@@ -154,7 +153,11 @@ export default function App() {
         <Route
           path="/registration"
           element={
-            !session ? <Registration supabase={supabase} /> : <Navigate to="/" />
+            !session ? (
+              <Registration supabase={supabase} />
+            ) : (
+              <Navigate to="/" />
+            )
           }
         />
       </Routes>

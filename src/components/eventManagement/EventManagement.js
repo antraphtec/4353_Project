@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "./EventManagement.css";
 import { createClient } from "@supabase/supabase-js";
-import skillsList from '../skillsList';
-
-
+import skillsList from "../skillsList";
 
 // Initialize Supabase client
 const supabase = createClient(
@@ -46,16 +44,44 @@ function EventManagement() {
     try {
       console.log("Sending event data to Supabase:", eventData);
 
-      const { data, error } = await supabase.from("events").insert([eventData]);
-      
-      if (error) {
-        console.error("Supabase insert error:", error);
-        alert("Something went wrong while saving the event: " + error.message);
+      // Insert event into events table
+      const { data: eventDataResponse, error: eventError } = await supabase
+        .from("events")
+        .insert([eventData]);
+
+      if (eventError) {
+        console.error("Supabase insert error:", eventError);
+        alert(
+          "Something went wrong while saving the event: " + eventError.message
+        );
         return;
       }
 
-      alert("Event Published Successfully!");
-      console.log("Supabase response:", data);
+      // Notify all volunteers about the new event
+      const { data: volunteerEmails, error: volunteerError } = await supabase
+        .from("accounts")
+        .select("email_address")
+        .eq("role", "volunteer");
+
+      if (volunteerError) {
+        console.error("Error fetching volunteer emails:", volunteerError);
+      } else {
+        const notifications = volunteerEmails.map((volunteer) => ({
+          recipient: volunteer.email_address,
+          message: `New event created: ${eventName}`,
+          event_id: eventDataResponse[0].id, // Assuming eventDataResponse has the event ID
+        }));
+
+        const { error: notificationError } = await supabase
+          .from("notifications")
+          .insert(notifications);
+
+        if (notificationError) {
+          console.error("Error sending notifications:", notificationError);
+        } else {
+          alert("Event Published and Volunteers Notified!");
+        }
+      }
     } catch (error) {
       console.error("Unexpected error creating event:", error.message);
       alert("Unexpected error occurred, please try again later.");

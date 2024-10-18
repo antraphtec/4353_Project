@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./NavBar.css";
 import { Link, useNavigate } from "react-router-dom";
+import Notification from "./Notification";
 
 const NavigationBar = ({ session, supabase }) => {
   const navigate = useNavigate();
@@ -63,6 +64,9 @@ const NavigationBar = ({ session, supabase }) => {
             </li>
             <li>
               <span>Welcome, {session.user.email}!</span>
+            </li>
+            <li>
+              <Notification supabase={supabase} session={session} />
             </li>
             <li>
               <button onClick={handleSignOut} className="sign-out-btn">
