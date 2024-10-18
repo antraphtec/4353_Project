@@ -1,11 +1,62 @@
-/* AdminDashboard.css */
+/* Navbar Styles (ensure it's placed above everything) */
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background-color: #2E5F52;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #2E5F52;
+  position: fixed; 
+  top: 0; 
+  left: 0;
+  width: 100%;
+  margin: 0; 
+  z-index: 1000; 
+  box-sizing: border-box;
+}
+
+/* Sidebar Styles */
+.admin-sidebar {
+  position: fixed; /* Fix sidebar to the left */
+  top: 70px; /* Adjust based on navbar height */
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #f4f4f4;
+  padding-top: 20px;
+  box-sizing: border-box;
+  z-index: 999; /* Below navbar but above content */
+}
+
+/* Sidebar Links */
+.admin-sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.admin-sidebar li {
+  padding: 15px 20px;
+  font-size: 16px;
+}
+
+.admin-sidebar li:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+/* Main Dashboard Content */
 .admin-dashboard {
+  margin-left: 250px; /* Offset for the sidebar */
+  margin-top: 70px;  /* Offset for the navbar */
   padding: 20px;
   background-color: #f9f9f9;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
+/* Dashboard Header */
 .dashboard-header {
   display: flex;
   align-items: center;
@@ -20,12 +71,14 @@
   color: #333;
 }
 
+/* Dashboard Content - Cards Layout */
 .dashboard-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
 }
 
+/* Individual Card Styling */
 .card {
   background-color: #ffffff;
   border-radius: 10px;
@@ -59,7 +112,13 @@
   background-color: #0056b3;
 }
 
+/* Responsive Layout */
 @media (max-width: 768px) {
+  .admin-dashboard {
+    margin-left: 0; /* Remove margin for mobile */
+    margin-top: 70px; /* Still keep space for navbar */
+  }
+
   .dashboard-content {
     grid-template-columns: 1fr;
   }
