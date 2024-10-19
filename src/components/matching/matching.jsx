@@ -6,6 +6,7 @@ import {
   FormControl,
   Typography,
   Button,
+  TextField,  // Import TextField for display
 } from "@mui/material";
 import "./matchingform.css";
 
@@ -14,17 +15,18 @@ const VolunteerMatchingForm = ({ supabase }) => {
   const [volunteers, setVolunteers] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState("");
   const [matchedVolunteers, setMatchedVolunteers] = useState([]);
+  const [selectedEventName, setSelectedEventName] = useState("");  // Track selected event name
 
   // Fetch events from Supabase
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        console.log("Fetching events..."); // Add debug statement here
+        console.log("Fetching events...");
         const { data, error } = await supabase.from("events").select("*");
 
         if (error) throw error;
 
-        console.log("Fetched events:", data); // Debug statement to see fetched data
+        console.log("Fetched events:", data);
         setEvents(data);
       } catch (error) {
         console.error("Error fetching events:", error.message);
@@ -42,7 +44,7 @@ const VolunteerMatchingForm = ({ supabase }) => {
 
         if (error) throw error;
 
-        console.log("Fetched volunteers:", data); // Debug statement
+        console.log("Fetched volunteers:", data);
         setVolunteers(data);
       } catch (error) {
         console.error("Error fetching volunteers:", error.message);
@@ -56,15 +58,20 @@ const VolunteerMatchingForm = ({ supabase }) => {
   const handleEventChange = (event) => {
     const selectedEventId = event.target.value;
 
-    console.log("Event selection triggered:", selectedEventId); // Debugging
+    console.log("Event selection triggered:", selectedEventId);
 
     setSelectedEvent(selectedEventId);
-    setMatchedVolunteers([]); // Clear previous matches when new event is selected
+
+    // Find the event name based on the selected event ID
+    const eventName = events.find((ev) => ev.id === selectedEventId)?.name || "";
+    setSelectedEventName(eventName);  // Update the selected event name in state
+
+    setMatchedVolunteers([]);  // Clear previous matches when new event is selected
   };
 
   // Handle volunteer matching
   const handleMatchVolunteers = async () => {
-    console.log("Selected event before matching:", selectedEvent); // Debug log for selected event
+    console.log("Selected event before matching:", selectedEvent);
 
     if (!selectedEvent) {
       alert("Please select an event.");
@@ -141,6 +148,17 @@ const VolunteerMatchingForm = ({ supabase }) => {
             <Typography>No events available</Typography>
           )}
         </FormControl>
+
+        {/* Text Field to Display Selected Event Name */}
+        <TextField
+          label="Selected Event"
+          value={selectedEventName}  // Display the selected event name here
+          fullWidth
+          margin="normal"
+          InputProps={{
+            readOnly: true,  // Make it read-only
+          }}
+        />
 
         {/* Volunteers List */}
         <Typography variant="h6">Volunteers:</Typography>
