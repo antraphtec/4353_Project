@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import ReportingModule from "./ReportingModule";
 import {
   Button,
   Drawer,
@@ -15,16 +16,16 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from '@mui/material';
-import ProfileManagement from '../profileManagement/profileManagementPage';
-import VolunteerMatching from '../matching/matching';
-import EventManagement from '../eventManagement/EventManagement';
-import VolunteerHistory from './volunteerHistory'; 
-import './AdminDashboard.css';
-import { format } from 'date-fns';
+} from "@mui/material";
+import ProfileManagement from "../profileManagement/profileManagementPage";
+import VolunteerMatching from "../matching/matching";
+import EventManagement from "../eventManagement/EventManagement";
+import VolunteerHistory from "./volunteerHistory";
+import "./AdminDashboard.css";
+import { format } from "date-fns";
 
 const AdminDashboard = ({ supabase }) => {
-  const [selectedView, setSelectedView] = useState('manageEvents');
+  const [selectedView, setSelectedView] = useState("manageEvents");
   const [isAdmin, setIsAdmin] = useState(null);
   const [loading, setLoading] = useState(true);
   const [events, setEvents] = useState([]);
@@ -32,14 +33,16 @@ const AdminDashboard = ({ supabase }) => {
 
   useEffect(() => {
     const checkAdminStatus = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       if (session) {
         const { data, error } = await supabase
-          .from('accounts')
-          .select('role')
-          .eq('email_address', session.user.email)
+          .from("accounts")
+          .select("role")
+          .eq("email_address", session.user.email)
           .single();
-        if (!error && data.role === 'admin') {
+        if (!error && data.role === "admin") {
           setIsAdmin(true);
         } else {
           setIsAdmin(false);
@@ -55,14 +58,14 @@ const AdminDashboard = ({ supabase }) => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const { data, error } = await supabase.from('events').select('*');
+        const { data, error } = await supabase.from("events").select("*");
         if (error) {
-          console.error('Error fetching events:', error);
+          console.error("Error fetching events:", error);
         } else {
           setEvents(data);
         }
       } catch (err) {
-        console.error('Error fetching events:', err);
+        console.error("Error fetching events:", err);
       } finally {
         setLoadingEvents(false);
       }
@@ -84,7 +87,7 @@ const AdminDashboard = ({ supabase }) => {
 
   return (
     <div className="admin-dashboard">
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: "flex" }}>
         {/* Sidebar */}
         <Drawer
           variant="permanent"
@@ -92,31 +95,46 @@ const AdminDashboard = ({ supabase }) => {
           sx={{
             width: 240, // Fixed width for the sidebar
             flexShrink: 0,
-            [`& .MuiDrawer-paper`]: { width: 240, boxSizing: 'border-box' }, // Ensure the drawer is 240px wide
+            [`& .MuiDrawer-paper`]: { width: 240, boxSizing: "border-box" }, // Ensure the drawer is 240px wide
           }}
         >
           <List>
-            <Typography variant="h5" style={{ margin: '20px', fontWeight: 'bold' }}>
+            <Typography
+              variant="h5"
+              style={{ margin: "20px", fontWeight: "bold" }}
+            >
               Admin Dashboard
             </Typography>
             <Divider />
-            <ListItem button onClick={() => handleSelectView('profileManagement')}>
+            <ListItem
+              button
+              onClick={() => handleSelectView("profileManagement")}
+            >
               <ListItemText primary="Profile Management" />
             </ListItem>
-            <ListItem button onClick={() => handleSelectView('manageEvents')}>
+            <ListItem button onClick={() => handleSelectView("manageEvents")}>
               <ListItemText primary="Manage Events" />
             </ListItem>
-            <ListItem button onClick={() => handleSelectView('volunteerMatching')}>
+            <ListItem
+              button
+              onClick={() => handleSelectView("volunteerMatching")}
+            >
               <ListItemText primary="Volunteer Matching" />
             </ListItem>
-            <ListItem button onClick={() => handleSelectView('viewEvents')}>
+            <ListItem button onClick={() => handleSelectView("viewEvents")}>
               <ListItemText primary="View Events" />
             </ListItem>
-            <ListItem button onClick={() => handleSelectView('notifications')}>
+            <ListItem button onClick={() => handleSelectView("notifications")}>
               <ListItemText primary="Send/Schedule Notifications" />
             </ListItem>
-            <ListItem button onClick={() => handleSelectView('volunteerHistory')}>
+            <ListItem
+              button
+              onClick={() => handleSelectView("volunteerHistory")}
+            >
               <ListItemText primary="Volunteer History" />
+            </ListItem>
+            <ListItem button onClick={() => handleSelectView("reporting")}>
+              <ListItemText primary="Reporting" />
             </ListItem>
           </List>
         </Drawer>
@@ -126,32 +144,32 @@ const AdminDashboard = ({ supabase }) => {
           sx={{
             flexGrow: 1,
             p: 3,
-            marginLeft: '0px',  // Make sure content aligns to the right of the sidebar
-            width: '1100px',  // Use the remaining width (full screen minus sidebar width)
-            boxSizing: 'border-box',  // Proper box-sizing for padding
+            marginLeft: "0px", // Make sure content aligns to the right of the sidebar
+            width: "1100px", // Use the remaining width (full screen minus sidebar width)
+            boxSizing: "border-box", // Proper box-sizing for padding
           }}
         >
-          <Typography variant="h4" style={{ marginBottom: '20px' }}>
-            {selectedView === 'profileManagement' && 'Profile Management'}
-            {selectedView === 'manageEvents' && 'Manage Events'}
-            {selectedView === 'volunteerMatching' && 'Volunteer Matching'}
-            {selectedView === 'viewEvents' && 'View Events'}
-            {selectedView === 'notifications' && 'Send/Schedule Notifications'}
-            {selectedView === 'volunteerHistory' && 'Volunteer History'}
+          <Typography variant="h4" style={{ marginBottom: "20px" }}>
+            {selectedView === "profileManagement" && "Profile Management"}
+            {selectedView === "manageEvents" && "Manage Events"}
+            {selectedView === "volunteerMatching" && "Volunteer Matching"}
+            {selectedView === "viewEvents" && "View Events"}
+            {selectedView === "notifications" && "Send/Schedule Notifications"}
+            {selectedView === "volunteerHistory" && "Volunteer History"}
           </Typography>
 
           {/* Conditionally render content based on selectedView */}
-          {selectedView === 'profileManagement' && (
+          {selectedView === "profileManagement" && (
             <ProfileManagement supabase={supabase} />
           )}
-          {selectedView === 'manageEvents' && (
+          {selectedView === "manageEvents" && (
             <EventManagement supabase={supabase} />
           )}
-          {selectedView === 'volunteerMatching' && (
+          {selectedView === "volunteerMatching" && (
             <VolunteerMatching supabase={supabase} />
           )}
-          {selectedView === 'viewEvents' && (
-            loadingEvents ? (
+          {selectedView === "viewEvents" &&
+            (loadingEvents ? (
               <p>Loading events...</p>
             ) : (
               <TableContainer component={Paper} className="dashboard-content">
@@ -174,13 +192,16 @@ const AdminDashboard = ({ supabase }) => {
                         <TableCell>{event.location}</TableCell>
                         <TableCell>
                           {event.date
-                            ? format(new Date(event.date), 'MMMM d, yyyy h:mm a')
-                            : 'No Date Available'}
+                            ? format(
+                                new Date(event.date),
+                                "MMMM d, yyyy h:mm a"
+                              )
+                            : "No Date Available"}
                         </TableCell>
                         <TableCell>
                           {event.skills && event.skills.length > 0
-                            ? event.skills.join(', ')
-                            : 'No Skills Available'}
+                            ? event.skills.join(", ")
+                            : "No Skills Available"}
                         </TableCell>
                         <TableCell>{event.urgency}</TableCell>
                       </TableRow>
@@ -188,18 +209,24 @@ const AdminDashboard = ({ supabase }) => {
                   </TableBody>
                 </Table>
               </TableContainer>
-            )
-          )}
-          {selectedView === 'notifications' && (
+            ))}
+          {selectedView === "notifications" && (
             <div>
               <Typography variant="h6">Notification Management</Typography>
-              <Button variant="contained" color="primary" style={{ marginTop: '20px' }}>
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ marginTop: "20px" }}
+              >
                 Send Notification
               </Button>
             </div>
           )}
-          {selectedView === 'volunteerHistory' && (
+          {selectedView === "volunteerHistory" && (
             <VolunteerHistory supabase={supabase} />
+          )}
+          {selectedView === "reporting" && (
+            <ReportingModule supabase={supabase} />
           )}
         </Box>
       </Box>
