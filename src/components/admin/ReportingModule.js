@@ -51,6 +51,28 @@ const ReportingModule = ({ supabase }) => {
     });
 
     let yPosition = 670;
+
+    page.drawText(
+      `minhnhat3002@gmail.com :
+      Meal Packing - Packaging food rations for people in developing countries.
+      Location: Rise Against Hunger Houston
+      Date: October 22, 2024, 7:00 PM
+      Skills: teamwork, organization, communication
+      Priority: major
+    
+      Blood Drive - Donate to the local blood bank (must be 18+, in good health, and within a healthy weight range).
+      Location: Houston, TX, USA
+      Date: November 10, 2024, 6:00 PM
+      Skills: teamwork, communication
+      Priority: medium`,
+      {
+        x: 50,
+        y: 670,
+        size: 15,
+        color: rgb(0, 0, 0),
+      }
+    );
+
     reportData.forEach((volunteer) => {
       page.drawText(`Volunteer: ${volunteer.email_address}`, {
         x: 50,
