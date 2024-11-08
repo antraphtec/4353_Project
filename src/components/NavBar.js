@@ -60,7 +60,7 @@ const NavigationBar = ({ session, supabase }) => {
         {session ? (
           <>
             <li>
-              <Link to={isAdmin ? "/admin" : "/volunteer"}>Profile</Link>
+              <Link to={isAdmin ? "/admin" : "/volunteer"}>Dashboard</Link>
             </li>
             <li>
               <span>Welcome, {session.user.email}!</span>
