@@ -60,7 +60,7 @@ const ReportingModule = ({ supabase }) => {
       Skills: teamwork, organization, communication
       Priority: major
     
-      Blood Drive - Donate to the local blood bank (must be 18+, in good health, and within a healthy weight range).
+      Blood Drive - Donate to the local blood bank (must be 18+ & in good health).
       Location: Houston, TX, USA
       Date: November 10, 2024, 6:00 PM
       Skills: teamwork, communication
