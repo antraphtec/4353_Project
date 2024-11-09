@@ -53,7 +53,7 @@ const ReportingModule = ({ supabase }) => {
     let yPosition = 670;
 
     page.drawText(
-      `minhnhat3002@gmail.com :
+      `Event Participation History for minhnhat3002@gmail.com :
       Meal Packing - Packaging food rations for people in developing countries.
       Location: Rise Against Hunger Houston
       Date: October 22, 2024, 7:00 PM
@@ -68,7 +68,7 @@ const ReportingModule = ({ supabase }) => {
       {
         x: 50,
         y: 670,
-        size: 15,
+        size: 12,
         color: rgb(0, 0, 0),
       }
     );
